@@ -39,6 +39,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     bool ifClickedOperator; //mark whether the operator is clicked
+    bool ifClickedDot;
     int opFlag; //represents which operator is selected
 
     QString currentEcho; //
