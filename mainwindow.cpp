@@ -8,10 +8,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     setWindowTitle("XClc");
     ui->lineEdit->setEnabled(false);
-    ui->lineEdit->setAlignment(Qt::AlignRight);//设置显示居右
-    ui->lineEdit->setStyleSheet("font-size:24px");//设置字体大小为18px
-    ui->lineEdit->setText("0");//设置初试文本为0
-
+    ui->lineEdit->setAlignment(Qt::AlignRight);//Set display right
+    ui->lineEdit->setStyleSheet("font-size:24px");//set font size as 24 px
+    ui->lineEdit->setText("0");//set init word as "0"
     //ui->lineEdit->setText("0");
     ifClickedOperator = false;
     opFlag = 0;
