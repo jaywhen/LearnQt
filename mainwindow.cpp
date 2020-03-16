@@ -8,10 +8,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     setWindowTitle("XClc");
     ui->lineEdit->setEnabled(false);
-    ui->lineEdit->setAlignment(Qt::AlignRight);//Set display right
+    ui->lineEdit->setAlignment(Qt::AlignRight);   //Set display right
     ui->lineEdit->setStyleSheet("font-size:24px");//set font size as 24 px
-    ui->lineEdit->setText("0");//set init word as "0"
-    //ui->lineEdit->setText("0");
+    ui->lineEdit->setText("0");                   //set init word as "0"
+
     ifClickedOperator = false;
     opFlag = 0;
     currentEcho = "";
@@ -32,64 +32,158 @@ void MainWindow::on_pushButton_AC_clicked()
     tmpStorage = "";
     result = 0;
     echoResult = "";
-
 }
 void MainWindow::on_pushButton_0_clicked()
 {
-    ui->lineEdit->setText("0");
+    if(!ifClickedOperator)
+    {
+        result = 0;
+        currentEcho+="1";
+        ui->lineEdit->setText(currentEcho);
+    } else{
+        tmpStorage+="1";
+        ui->lineEdit->setText(tmpStorage);
+
+    }
 
 }
 void MainWindow::on_pushButton_1_clicked()
 {
-    ui->lineEdit->setText("1");
+    if(!ifClickedOperator)
+    {
+        result = 0;
+        currentEcho+="1";
+        ui->lineEdit->setText(currentEcho);
+    } else{
+        tmpStorage+="1";
+        ui->lineEdit->setText(tmpStorage);
+
+    }
 
 
 }
 void MainWindow::on_pushButton_2_clicked()
 {
-    ui->lineEdit->setText("2");
+    if(!ifClickedOperator)
+    {
+        result = 0;
+        currentEcho+="2";
+        ui->lineEdit->setText(currentEcho);
+    } else{
+        tmpStorage+="2";
+        ui->lineEdit->setText(tmpStorage);
+
+    }
+
 
 
 }
 void MainWindow::on_pushButton_3_clicked()
 {
-    ui->lineEdit->setText("3");
+    if(!ifClickedOperator)
+    {
+        result = 0;
+        currentEcho+="3";
+        ui->lineEdit->setText(currentEcho);
+    } else{
+        tmpStorage+="3";
+        ui->lineEdit->setText(tmpStorage);
+
+    }
+
 
 
 }
 void MainWindow::on_pushButton_4_clicked()
 {
-    ui->lineEdit->setText("4");
+    if(!ifClickedOperator)
+    {
+        result = 0;
+        currentEcho+="4";
+        ui->lineEdit->setText(currentEcho);
+    } else{
+        tmpStorage+="4";
+        ui->lineEdit->setText(tmpStorage);
+
+    }
+
 
 
 }
 void MainWindow::on_pushButton_5_clicked()
 {
-    ui->lineEdit->setText("5");
+    if(!ifClickedOperator)
+    {
+        result = 0;
+        currentEcho+="5";
+        ui->lineEdit->setText(currentEcho);
+    } else{
+        tmpStorage+="5";
+        ui->lineEdit->setText(tmpStorage);
+
+    }
 
 
 }
 void MainWindow::on_pushButton_6_clicked()
 {
-    ui->lineEdit->setText("6");
+    if(!ifClickedOperator)
+    {
+        result = 0;
+        currentEcho+="6";
+        ui->lineEdit->setText(currentEcho);
+    } else{
+        tmpStorage+="6";
+        ui->lineEdit->setText(tmpStorage);
+
+    }
 
 
 }
 void MainWindow::on_pushButton_7_clicked()
 {
-    ui->lineEdit->setText("7");
+    if(!ifClickedOperator)
+    {
+        result = 0;
+        currentEcho+="7";
+        ui->lineEdit->setText(currentEcho);
+    } else{
+        tmpStorage+="7";
+        ui->lineEdit->setText(tmpStorage);
+
+    }
+
 
 
 }
 void MainWindow::on_pushButton_8_clicked()
 {
-    ui->lineEdit->setText("8");
+    if(!ifClickedOperator)
+    {
+        result = 0;
+        currentEcho+="8";
+        ui->lineEdit->setText(currentEcho);
+    } else{
+        tmpStorage+="8";
+        ui->lineEdit->setText(tmpStorage);
+
+    }
+
 
 
 }
 void MainWindow::on_pushButton_9_clicked()
 {
-    ui->lineEdit->setText("9");
+    if(!ifClickedOperator)
+    {
+        result = 0;
+        currentEcho+="9";
+        ui->lineEdit->setText(currentEcho);
+    } else{
+        tmpStorage+="9";
+        ui->lineEdit->setText(tmpStorage);
+
+    }
 
 
 }
