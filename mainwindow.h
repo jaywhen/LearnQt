@@ -43,6 +43,7 @@ private:
     Ui::MainWindow *ui;
     bool ifClickedOperator; //mark whether the operator is clicked
     bool ifClickedDot;
+    bool haveNum; //Determine whether a number has been entered
     int opFlag; //represents which operator is selected
     double result;
 

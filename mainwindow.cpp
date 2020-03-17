@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->lineEdit->setAlignment(Qt::AlignRight);   //Set display right
     ui->lineEdit->setStyleSheet("font-size:24px");//set font size as 24 px
     ui->lineEdit->setText("0");                   //set init word as "0"
-    initButton();
+    initButton(); //all button set as 0
 
 }
 
@@ -20,9 +20,9 @@ void MainWindow::initButton()
     ifClickedOperator = false;
     ifClickedDot = false;
     opFlag = 0;
-    valueA = "";
-    valueB = "";
-    echoResult = "";
+    valueA = "0";
+    valueB = "0";
+    echoResult = "0";
     result = 0;
 }
 void MainWindow::clickNumButton(QString num)
@@ -58,8 +58,6 @@ void MainWindow::on_pushButton_0_clicked()
 void MainWindow::on_pushButton_1_clicked()
 {
     clickNumButton("1");
-
-
 
 }
 void MainWindow::on_pushButton_2_clicked()
@@ -196,10 +194,6 @@ void MainWindow::on_pushButton_equal_clicked()
 
 
         }
-
-
-
-
 
     }
 }
