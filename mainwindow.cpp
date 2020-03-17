@@ -307,6 +307,13 @@ void MainWindow::on_pushButton_dot_clicked()
     ifClickedDot = true;
 
 }
+void MainWindow::on_actionWhat_is_XCalc_triggered()
+{
+    AboutX *ab = new AboutX();
+    ab->setWindowTitle("About me");
+    ab->show();
+
+}
 MainWindow::~MainWindow()
 {
     delete ui;
