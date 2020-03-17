@@ -10,4 +10,4 @@
 
 ## Screenshot
 
-![ui](/home/jaywhen/Qt-creator-project/XCacl/XCalc_Image/ui.png)
+![sreenshot](https://github.com/jaywhen/XCalc/blob/master/XCalc_Image/ui.png)
