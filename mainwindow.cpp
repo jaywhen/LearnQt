@@ -11,183 +11,104 @@ MainWindow::MainWindow(QWidget *parent)
     ui->lineEdit->setAlignment(Qt::AlignRight);   //Set display right
     ui->lineEdit->setStyleSheet("font-size:24px");//set font size as 24 px
     ui->lineEdit->setText("0");                   //set init word as "0"
-
-    ifClickedOperator = false;
-    ifClickedDot = false;
-    opFlag = 0;
-    currentEcho = "";
-    tmpStorage = "";
-    result = 0;
-    echoResult = "";
-
-
+    initButton();
 
 }
 
+void MainWindow::initButton()
+{
+    ifClickedOperator = false;
+    ifClickedDot = false;
+    opFlag = 0;
+    valueA = "";
+    valueB = "";
+    echoResult = "";
+    result = 0;
+}
+void MainWindow::clickNumButton(QString num)
+{
+    if(!ifClickedOperator)
+    {
+        result = 0;
+        valueA+=num;
+        ui->lineEdit->setText(valueA);
+    } else{
+        valueB+=num;
+        ui->lineEdit->setText(valueB);
 
+    }
+
+}
 void MainWindow::on_pushButton_AC_clicked()
 {
     ui->lineEdit->setText("0");
     ifClickedOperator = false;
     ifClickedDot = false;
     opFlag = 0;
-    currentEcho = "";
-    tmpStorage = "";
+    valueA = "";
+    valueB = "";
     result = 0;
     echoResult = "";
 }
 void MainWindow::on_pushButton_0_clicked()
 {
-    if(!ifClickedOperator)
-    {
-        result = 0;
-        currentEcho+="0";
-        ui->lineEdit->setText(currentEcho);
-    } else{
-        tmpStorage+="0";
-        ui->lineEdit->setText(tmpStorage);
-
-    }
+    clickNumButton("0");
 
 }
 void MainWindow::on_pushButton_1_clicked()
 {
-    if(!ifClickedOperator)
-    {
-        result = 0;
-        currentEcho+="1";
-        ui->lineEdit->setText(currentEcho);
-    } else{
-        tmpStorage+="1";
-        ui->lineEdit->setText(tmpStorage);
+    clickNumButton("1");
 
-    }
 
 
 }
 void MainWindow::on_pushButton_2_clicked()
 {
-    if(!ifClickedOperator)
-    {
-        result = 0;
-        currentEcho+="2";
-        ui->lineEdit->setText(currentEcho);
-    } else{
-        tmpStorage+="2";
-        ui->lineEdit->setText(tmpStorage);
-
-    }
+    clickNumButton("2");
 
 
 
 }
 void MainWindow::on_pushButton_3_clicked()
 {
-    if(!ifClickedOperator)
-    {
-        result = 0;
-        currentEcho+="3";
-        ui->lineEdit->setText(currentEcho);
-    } else{
-        tmpStorage+="3";
-        ui->lineEdit->setText(tmpStorage);
-
-    }
+    clickNumButton("3");
 
 
 
 }
 void MainWindow::on_pushButton_4_clicked()
 {
-    if(!ifClickedOperator)
-    {
-        result = 0;
-        currentEcho+="4";
-        ui->lineEdit->setText(currentEcho);
-    } else{
-        tmpStorage+="4";
-        ui->lineEdit->setText(tmpStorage);
-
-    }
+    clickNumButton("4");
 
 
 
 }
 void MainWindow::on_pushButton_5_clicked()
 {
-    if(!ifClickedOperator)
-    {
-        result = 0;
-        currentEcho+="5";
-        ui->lineEdit->setText(currentEcho);
-    } else{
-        tmpStorage+="5";
-        ui->lineEdit->setText(tmpStorage);
-
-    }
+    clickNumButton("5");
 
 
 }
 void MainWindow::on_pushButton_6_clicked()
 {
-    if(!ifClickedOperator)
-    {
-        result = 0;
-        currentEcho+="6";
-        ui->lineEdit->setText(currentEcho);
-    } else{
-        tmpStorage+="6";
-        ui->lineEdit->setText(tmpStorage);
-
-    }
+    clickNumButton("6");
 
 
 }
 void MainWindow::on_pushButton_7_clicked()
 {
-    if(!ifClickedOperator)
-    {
-        result = 0;
-        currentEcho+="7";
-        ui->lineEdit->setText(currentEcho);
-    } else{
-        tmpStorage+="7";
-        ui->lineEdit->setText(tmpStorage);
-
-    }
-
+    clickNumButton("7");
 
 
 }
 void MainWindow::on_pushButton_8_clicked()
 {
-    if(!ifClickedOperator)
-    {
-        result = 0;
-        currentEcho+="8";
-        ui->lineEdit->setText(currentEcho);
-    } else{
-        tmpStorage+="8";
-        ui->lineEdit->setText(tmpStorage);
-
-    }
-
-
+    clickNumButton("8");
 
 }
 void MainWindow::on_pushButton_9_clicked()
 {
-    if(!ifClickedOperator)
-    {
-        result = 0;
-        currentEcho+="9";
-        ui->lineEdit->setText(currentEcho);
-    } else{
-        tmpStorage+="9";
-        ui->lineEdit->setText(tmpStorage);
-
-    }
-
+    clickNumButton("9");
 
 }
 
@@ -247,28 +168,28 @@ void MainWindow::on_pushButton_equal_clicked()
     switch (opFlag)
     {
     case 1:
-        result += currentEcho.toFloat()+tmpStorage.toFloat();
+        result += valueA.toFloat()+valueB.toFloat();
         echoResult = QString("%1").arg(result);
         ui->lineEdit->setText(echoResult);
         break;
     case 2:
-        result = currentEcho.toFloat() - tmpStorage.toFloat();
+        result = valueA.toFloat() - valueB.toFloat();
         echoResult = QString("%1").arg(result);
         ui->lineEdit->setText(echoResult);
         break;
     case 3:
-        result = currentEcho.toFloat() * tmpStorage.toFloat();
+        result = valueA.toFloat() * valueB.toFloat();
         echoResult = QString("%1").arg(result);
         ui->lineEdit->setText(echoResult);
         break;
     case 4:
-        if(tmpStorage.toFloat()==0)
+        if(valueB.toFloat()==0)
         {
             ui->lineEdit->setText("error!");
             //QTimer::singleShot(1000,this,SLOT(on_pushButton_clear_clicked()));
             break;
         }else {
-            result = currentEcho.toFloat() / tmpStorage.toFloat();
+            result = valueA.toFloat() / valueB.toFloat();
             echoResult = QString("%1").arg(result);
             ui->lineEdit->setText(echoResult);
             break;
@@ -288,18 +209,18 @@ void MainWindow::on_pushButton_dot_clicked()
     {
         if(!ifClickedOperator)
         {
-            currentEcho+=".";
-            ui->lineEdit->setText(currentEcho);
+            valueA+=".";
+            ui->lineEdit->setText(valueA);
         }else {
-            tmpStorage+=".";
-            ui->lineEdit->setText(tmpStorage);
+            valueB+=".";
+            ui->lineEdit->setText(valueB);
         }
     } else {
 
         if(ifClickedOperator)
         {
-            tmpStorage+=".";
-            ui->lineEdit->setText(tmpStorage);
+            valueB+=".";
+            ui->lineEdit->setText(valueB);
 
         }
 
@@ -307,6 +228,7 @@ void MainWindow::on_pushButton_dot_clicked()
     ifClickedDot = true;
 
 }
+//menu bar
 void MainWindow::on_actionWhat_is_XCalc_triggered()
 {
     AboutX *ab = new AboutX();

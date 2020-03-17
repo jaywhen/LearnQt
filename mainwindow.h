@@ -13,6 +13,8 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void initButton();
+    void clickNumButton(QString num);
     ~MainWindow();
 private slots:
 
@@ -42,12 +44,14 @@ private:
     bool ifClickedOperator; //mark whether the operator is clicked
     bool ifClickedDot;
     int opFlag; //represents which operator is selected
-
-    QString currentEcho; //
-    QString tmpStorage;
-
     double result;
+
+    QString valueA; //
+    QString valueB;
     QString echoResult;
+
+    
+    
 
 
 
