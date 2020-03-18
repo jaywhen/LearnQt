@@ -21,6 +21,10 @@ public:
     int getOpPriority(QChar op);
     void initAll();
     void clickedNum(char num);
+    void infixToSuffix();
+    QVector<QString> splitStr(QString beSplit);
+    int getPriority(QChar op);
+
     ~MainWindow();
 private slots:
 
@@ -62,8 +66,9 @@ private:
 //    QString echoResult;
 
     //after modify
+    QVector<QString> redesign; //Store split string
     QStack<QChar> oPStack;
-    QStack<QChar> expOutPutStack;
+    QStack<QString> expOutPutStack;
     bool ifWorkFinished;
 
 };

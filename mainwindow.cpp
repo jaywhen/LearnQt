@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <QDebug>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -11,7 +11,84 @@ MainWindow::MainWindow(QWidget *parent)
     ui->lineEdit->setAlignment(Qt::AlignRight);   //Set display right
     ui->lineEdit->setStyleSheet("font-size:24px");//set font size as 24 px
     ui->lineEdit->setText("0");                   //set init word as "0"
+    QString test = "-3";
+    double t = test.toFloat();
+    qDebug()<<t;
     initAll();
+}
+int MainWindow::getPriority(QChar op)
+{
+    //op.cell(), returns the cell (least significant byte) of the Unicode character.
+    //The smaller the number, the higher the priority
+    switch (op.cell()) {
+    case '#': return 3;
+    case '+':
+    case '-': return 2;
+    case 'x':
+    case '/': return 1;
+    case '(': return 0;
+    case ')': return -1; //')'special priority, special handling
+    }
+    return 0;
+}
+QVector<QString> MainWindow::splitStr(QString beSplit)
+{
+    //Rough Division
+    QVector<QString> newString;
+    for(int i=0; i<beSplit.size(); ++i)
+    {
+        //Process unsigned numbers first
+        QString thenum;
+        while (beSplit[i].isDigit() || beSplit[i]=='.') {
+            thenum += beSplit[i];
+            ++i;
+        }
+        if(thenum.size())
+            newString.push_back(thenum);
+        if(!(beSplit[i].isDigit() || beSplit[i]=='.')) //if is op
+        {
+            QString tmpOp;
+            tmpOp = beSplit[i];
+            newString.push_back(tmpOp);
+        }
+    }
+
+    //return newString;//will be comment
+
+
+    //now we got the newString(QVector)
+    //Handle minus sign
+    for(int j=0; j<newString.size(); ++j)
+    {
+        //assume we have - 36 + 1 * 4 / 2
+        if(j==0 && newString.size() > 1 && newString[j] == '-' && newString[j+1][0].isDigit())
+        {
+            newString[j+1].insert(0, '-');
+            newString.remove(j);
+        }else if(j==0 && newString.size() > 1 && newString[j] == '-' && newString[j+1][0]=='(')
+            newString.insert(0, "0");
+        else if(newString[j] == "-" && j != 0 && newString[j-1]=="(" && j != newString.size() - 1 && newString[j+1][0].isDigit())
+        {
+            newString[j+1].insert(0, "-");
+            newString.remove(j);
+        }
+    }
+    //debug
+    qDebug()<<newString[0];
+    qDebug()<<newString[1];
+    qDebug()<<newString[2];
+
+    return newString;
+
+
+
+
+
+}
+void MainWindow::infixToSuffix()
+{
+    //QString theExp = ui->lineEdit->text();
+
 }
 
 void MainWindow::initAll()
@@ -37,30 +114,7 @@ void MainWindow::clickedNum(char num)
 
 }
 
-//void MainWindow::initButton()
-//{
-//    ifClickedOperator = false;
-//    ifClickedDot = false;
-//    opFlag = 0;
-//    valueA = "0";
-//    valueB = "0";
-//    echoResult = "0";
-//    result = 0;
-//}
-//void MainWindow::clickNumButton(QString num)
-//{
-//    if(!ifClickedOperator)
-//    {
-//        result = 0;
-//        valueA+=num;
-//        ui->lineEdit->setText(valueA);
-//    } else{
-//        valueB+=num;
-//        ui->lineEdit->setText(valueB);
 
-//    }
-
-//}
 void MainWindow::on_pushButton_AC_clicked()
 {
     ui->lineEdit->setText("0");
@@ -223,7 +277,7 @@ void MainWindow::on_pushButton_divi_clicked()
         initAll();
     }else {
         QString theline = ui->lineEdit->text();
-        ui->lineEdit->setText(theline+"÷");
+        ui->lineEdit->setText(theline+"/");
         ifWorkFinished = false;
     }
 
@@ -231,6 +285,14 @@ void MainWindow::on_pushButton_divi_clicked()
 
 void MainWindow::on_pushButton_equal_clicked()
 {
+    //Press the "=" sign to change the expression on the screen to a suffix expression
+    //just for debug ....
+     //QString haha =ui->lineEdit->text();
+     //QVector<QString> yes = splitStr(haha);
+
+
+
+
 
 
 }
