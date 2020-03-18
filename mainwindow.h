@@ -26,6 +26,7 @@ public:
     int getPriority(QChar op);
     bool isNumStr(QString str);
     bool isOpStr(QChar str);
+    void caclPostfix();
 
     ~MainWindow();
 private slots:
@@ -60,8 +61,11 @@ private:
 
     //after modify
     QVector<QString> redesign; //Store split string
+    QVector<QString> completeExp;
     QStack<QString> oPStack;
     QStack<QString> expOutPutStack;
+    QStack<double> caclStack;
+
     bool ifWorkFinished;
 
 };

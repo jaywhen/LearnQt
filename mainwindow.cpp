@@ -20,6 +20,8 @@ void MainWindow::initAll()
         oPStack.clear();
     if(!expOutPutStack.isEmpty())
         expOutPutStack.clear();
+    if(!caclStack.isEmpty())
+        caclStack.clear();
     //oPStack.push("#");
 }
 int MainWindow::getPriority(QChar op)
@@ -39,7 +41,7 @@ int MainWindow::getPriority(QChar op)
 }
 bool MainWindow::isOpStr(QChar str)
 {
-    if(str=='+' || str=='-' || str=='x' || str=='/')
+    if(str=='+' || str=='-' || str=='x' || str=='/' || '(' || ')')
         return true;
     else
         return false;
@@ -62,19 +64,17 @@ QVector<QString> MainWindow::splitStr(QString beSplit)
             newString.push_back(thenum);
         if(isOpStr(beSplit[i])) //if is op
         {
+            if(i==beSplit.size())
+                break;
+            //this is a little bug wait to debug
+
             QString tmpOp;
             tmpOp = beSplit[i];
             newString.push_back(tmpOp);
+            qDebug()<<"now i is : "<<i<<"   "<<beSplit[i]<<"-----";
             qDebug()<<"tmop is : "<<tmpOp;
         }
     }
-    qDebug()<<newString[0];
-    qDebug()<<newString[1];
-    qDebug()<<newString[2];
-    //qDebug()<<newString[3];
-
-    //return newString;//will be comment
-
 
     //now we got the newString(QVector)
     //Handle minus sign
@@ -93,10 +93,11 @@ QVector<QString> MainWindow::splitStr(QString beSplit)
             newString.remove(j);
         }
     }
-    //debug
-//    qDebug()<<newString[0];
-//    qDebug()<<newString[1];
-    qDebug()<<"============================";
+    for(int a=0; a<newString.size();++a)
+    {
+        qDebug()<<newString[a]<<"  off set";
+    }
+
 
     return newString;
 
@@ -113,13 +114,7 @@ bool MainWindow::isNumStr(QString str)
 
 void MainWindow::infixToSuffix(QVector<QString> beStack)
 {
-    qDebug()<<beStack.size();
-    for(int s=0; s<beStack.size(); ++s)
-    {
-        qDebug()<<beStack[s];
-    }
-    qDebug()<<"---------------";
-    //build output stack
+
     for(int i=0; i<beStack.size(); ++i)
     {
         if(isNumStr(beStack[i]))
@@ -169,26 +164,78 @@ void MainWindow::infixToSuffix(QVector<QString> beStack)
     }
     for(int k=0; k<oPStack.size(); ++k)
     {
-        if(oPStack.top()=="#")
-            break;
+        //qDebug()<<oPStack.top()<<";";
         expOutPutStack.push(oPStack.pop());
-
     }
-    //qDebug()<<expOutPutStack;
-    while(1){
-        if(expOutPutStack.empty())
+
+    qDebug()<<"============comp==============";
+    int sz = expOutPutStack.size();
+    for(int a = 0; a<sz; ++a)
+        completeExp.push_front(expOutPutStack.pop());
+    for(int b = 0; b<sz; ++b)
+        qDebug()<<completeExp[b];
+
+}
+//now we got a complete output stack
+void MainWindow::caclPostfix()
+{
+    qDebug()<<"final";
+
+    double num1, num2;
+    for(int i=0; i<completeExp.size(); ++i)
+    {
+        //if is num, just push in stack
+        if(isNumStr(completeExp[i]))
         {
-            break;
-        }else
-        {
-            qDebug()<<expOutPutStack.top();
-            expOutPutStack.pop();
+            caclStack.push(completeExp[i].toFloat());
+            qDebug()<<caclStack.top();
+        }else {
+            //if is op,
+            switch (completeExp[i][0].cell()) {
+            case '+':
+                num1 = caclStack.pop();
+                num2 = caclStack.pop();
+                caclStack.push(num1+num2);
+                qDebug()<<num1+num2;
+                break;
+            case '-':
+                num1 = caclStack.pop();
+                num2 = caclStack.pop();
+                caclStack.push(num1-num2);
+                qDebug()<<num1-num2;
+                break;
+            case 'x':
+                num1 = caclStack.pop();
+                num2 = caclStack.pop();
+                caclStack.push(num1*num2);
+                qDebug()<<num1*num2;
+                break;
+            case '/':
+                num1 = caclStack.pop();
+                num2 = caclStack.pop();
+                caclStack.push(num1/num2);
+                qDebug()<<num1/num2;
+                break;
+            }
         }
 
     }
+    qDebug()<<caclStack.top();
+    QString result =QString("%1").arg(caclStack.top());
+    ui->lineEdit->setText(result);
+
 
 }
+void MainWindow::on_pushButton_equal_clicked()
+{
+    //Press the "=" sign to change the expression on the screen to a suffix expression
+    //just for debug ....
 
+     QString haha =ui->lineEdit->text();
+     QVector<QString> yes = splitStr(haha);
+     infixToSuffix(yes);
+     caclPostfix();
+}
 
 void MainWindow::clickedNum(char num)
 {
@@ -211,73 +258,21 @@ void MainWindow::on_pushButton_AC_clicked()
     initAll();
 
 }
-void MainWindow::on_pushButton_0_clicked()
+
+
+
+
+void MainWindow::on_pushButton_dot_clicked()
 {
-
-    clickedNum('0');
-
-}
-void MainWindow::on_pushButton_1_clicked()
-{
-
-    clickedNum('1');
-
-}
-void MainWindow::on_pushButton_2_clicked()
-{
-
-    clickedNum('2');
-
-
-
-}
-void MainWindow::on_pushButton_3_clicked()
-{
-
-    clickedNum('3');
-
-
-
-}
-void MainWindow::on_pushButton_4_clicked()
-{
-
-    clickedNum('4');
-
-
-
-}
-void MainWindow::on_pushButton_5_clicked()
-{
-
-    clickedNum('5');
-
-
-}
-void MainWindow::on_pushButton_6_clicked()
-{
-
-    clickedNum('6');
-
-
-}
-void MainWindow::on_pushButton_7_clicked()
-{
-
-    clickedNum('7');
-
-
-}
-void MainWindow::on_pushButton_8_clicked()
-{
-
-    clickedNum('8');
-
-}
-void MainWindow::on_pushButton_9_clicked()
-{
-
-    clickedNum('9');
+    if(ifWorkFinished)
+    {
+        //ui->lineEdit->setText("You start with . !?");
+        initAll();
+    }else {
+        QString theline = ui->lineEdit->text();
+        ui->lineEdit->setText(theline+".");
+        ifWorkFinished = false;
+    }
 
 }
 void MainWindow::on_pushButton_leftBracket_clicked()
@@ -373,32 +368,73 @@ void MainWindow::on_pushButton_divi_clicked()
 
 }
 
-void MainWindow::on_pushButton_equal_clicked()
+void MainWindow::on_pushButton_0_clicked()
 {
-    //Press the "=" sign to change the expression on the screen to a suffix expression
-    //just for debug ....
-     QString haha =ui->lineEdit->text();
-     QVector<QString> yes = splitStr(haha);
-     infixToSuffix(yes);
 
+    clickedNum('0');
 
+}
+void MainWindow::on_pushButton_1_clicked()
+{
 
+    clickedNum('1');
 
+}
+void MainWindow::on_pushButton_2_clicked()
+{
+
+    clickedNum('2');
 
 
 
 }
-void MainWindow::on_pushButton_dot_clicked()
+void MainWindow::on_pushButton_3_clicked()
 {
-    if(ifWorkFinished)
-    {
-        //ui->lineEdit->setText("You start with . !?");
-        initAll();
-    }else {
-        QString theline = ui->lineEdit->text();
-        ui->lineEdit->setText(theline+".");
-        ifWorkFinished = false;
-    }
+
+    clickedNum('3');
+
+
+
+}
+void MainWindow::on_pushButton_4_clicked()
+{
+
+    clickedNum('4');
+
+
+
+}
+void MainWindow::on_pushButton_5_clicked()
+{
+
+    clickedNum('5');
+
+
+}
+void MainWindow::on_pushButton_6_clicked()
+{
+
+    clickedNum('6');
+
+
+}
+void MainWindow::on_pushButton_7_clicked()
+{
+
+    clickedNum('7');
+
+
+}
+void MainWindow::on_pushButton_8_clicked()
+{
+
+    clickedNum('8');
+
+}
+void MainWindow::on_pushButton_9_clicked()
+{
+
+    clickedNum('9');
 
 }
 //menu bar
