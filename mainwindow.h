@@ -1,8 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+//#include <iostream>
 #include <QMainWindow>
 #include <QStack>
+//#include <unistd.h>
 #include "aboutx.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

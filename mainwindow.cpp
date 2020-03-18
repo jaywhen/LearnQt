@@ -138,11 +138,32 @@ void MainWindow::on_pushButton_9_clicked()
 }
 void MainWindow::on_pushButton_leftBracket_clicked()
 {
+    if(ifWorkFinished)
+    {
+        ui->lineEdit->setText("(");
+        ifWorkFinished = false;
+    }else {
+        QString theline = ui->lineEdit->text();
+        ui->lineEdit->setText(theline+"(");
+        ifWorkFinished = false;
+    }
+
 
 
 }
 void MainWindow::on_pushButton_rightBracket_clicked()
-{}
+{
+    if(ifWorkFinished)
+    {
+        ui->lineEdit->setText(")");
+        ifWorkFinished = false;
+    }else {
+        QString theline = ui->lineEdit->text();
+        ui->lineEdit->setText(theline+")");
+        ifWorkFinished = false;
+    }
+
+}
 void MainWindow::on_pushButton_backSP_clicked()
 {
     QString theline = ui->lineEdit->text();
@@ -152,114 +173,78 @@ void MainWindow::on_pushButton_backSP_clicked()
 
 void MainWindow::on_pushButton_add_clicked()
 {
-//    if(!ifClickedOperator)
-//    {
-//        ui->lineEdit->setText("+");
-//        ifClickedOperator = true;
-//        opFlag = 1;
-//    } else {
-//        ui->lineEdit->setText("error!");
+    //如果一开始就按+号
+    if(ifWorkFinished){
+        ui->lineEdit->setText("");
+        initAll();
+        ifWorkFinished = false;
+    }else {
+        QString theline = ui->lineEdit->text();
+        ui->lineEdit->setText(theline+"+");
+        ifWorkFinished = false;
 
-//    }
+    }
 
 }
 void MainWindow::on_pushButton_sub_clicked()
 {
-//    if(!ifClickedOperator)
-//    {
-//        ui->lineEdit->setText("-");
-//        ifClickedOperator = true;
-//        opFlag = 2;
-//    } else {
-//        ui->lineEdit->setText("error!");
-
-//    }
+    //一开始就按-号，做负数显示
+    if(ifWorkFinished)
+    {
+        ui->lineEdit->setText("-");
+        ifWorkFinished = false;
+    }else {
+        QString theline = ui->lineEdit->text();
+        ui->lineEdit->setText(theline+"-");
+        ifWorkFinished = false;
+    }
 
 }
 void MainWindow::on_pushButton_mult_clicked()
 {
-//    if(!ifClickedOperator)
-//    {
-//        ui->lineEdit->setText("x");
-//        ifClickedOperator = true;
-//        opFlag = 3;
-//    } else {
-//        ui->lineEdit->setText("error!");
+    if(ifWorkFinished)
+    {
+        //ui->lineEdit->setText("You start with x !?");
+        initAll();
+    }else {
+        QString theline = ui->lineEdit->text();
+        ui->lineEdit->setText(theline+"x");
+        ifWorkFinished = false;
 
-//    }
+
+    }
+
 }
 void MainWindow::on_pushButton_divi_clicked()
 {
-//    if(!ifClickedOperator)
-//    {
-//        ui->lineEdit->setText("÷");
-//        ifClickedOperator = true;
-//        opFlag = 4;
-//    } else {
-//        ui->lineEdit->setText("error!");
+    if(ifWorkFinished)
+    {
+        //ui->lineEdit->setText("You start with ÷ !?");
+        initAll();
+    }else {
+        QString theline = ui->lineEdit->text();
+        ui->lineEdit->setText(theline+"÷");
+        ifWorkFinished = false;
+    }
 
-//    }
 }
 
 void MainWindow::on_pushButton_equal_clicked()
 {
-//    switch (opFlag)
-//    {
-//    case 1:
-//        result += valueA.toFloat()+valueB.toFloat();
-//        echoResult = QString("%1").arg(result);
-//        ui->lineEdit->setText(echoResult);
-//        break;
-//    case 2:
-//        result = valueA.toFloat() - valueB.toFloat();
-//        echoResult = QString("%1").arg(result);
-//        ui->lineEdit->setText(echoResult);
-//        break;
-//    case 3:
-//        result = valueA.toFloat() * valueB.toFloat();
-//        echoResult = QString("%1").arg(result);
-//        ui->lineEdit->setText(echoResult);
-//        break;
-//    case 4:
-//        if(valueB.toFloat()==0)
-//        {
-//            ui->lineEdit->setText("error!");
-//            //QTimer::singleShot(1000,this,SLOT(on_pushButton_clear_clicked()));
-//            break;
-//        }else {
-//            result = valueA.toFloat() / valueB.toFloat();
-//            echoResult = QString("%1").arg(result);
-//            ui->lineEdit->setText(echoResult);
-//            break;
 
 
-//        }
-
-//    }
 }
 void MainWindow::on_pushButton_dot_clicked()
 {
-//    if(!ifClickedDot)
-//    {
-//        if(!ifClickedOperator)
-//        {
-//            valueA+=".";
-//            ui->lineEdit->setText(valueA);
-//        }else {
-//            valueB+=".";
-//            ui->lineEdit->setText(valueB);
-//        }
-//    } else {
-
-//        if(ifClickedOperator)
-//        {
-//            valueB+=".";
-//            ui->lineEdit->setText(valueB);
-
-//        }
-
-//    }
-//    ifClickedDot = true;
+    if(ifWorkFinished)
+    {
+        //ui->lineEdit->setText("You start with . !?");
+        initAll();
+    }else {
+        QString theline = ui->lineEdit->text();
+        ui->lineEdit->setText(theline+".");
+        ifWorkFinished = false;
+    }
 
 }
 //menu bar
