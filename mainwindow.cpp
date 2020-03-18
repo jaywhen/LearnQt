@@ -11,10 +11,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->lineEdit->setAlignment(Qt::AlignRight);   //Set display right
     ui->lineEdit->setStyleSheet("font-size:24px");//set font size as 24 px
     ui->lineEdit->setText("0");                   //set init word as "0"
-    QString test = "-3";
-    double t = test.toFloat();
-    qDebug()<<t;
     initAll();
+}
+void MainWindow::initAll()
+{
+    ifWorkFinished = true;
+    if(!oPStack.isEmpty())
+        oPStack.clear();
+    if(!expOutPutStack.isEmpty())
+        expOutPutStack.clear();
+    //oPStack.push("#");
 }
 int MainWindow::getPriority(QChar op)
 {
@@ -31,8 +37,17 @@ int MainWindow::getPriority(QChar op)
     }
     return 0;
 }
+bool MainWindow::isOpStr(QChar str)
+{
+    if(str=='+' || str=='-' || str=='x' || str=='/')
+        return true;
+    else
+        return false;
+}
 QVector<QString> MainWindow::splitStr(QString beSplit)
 {
+    qDebug()<<beSplit;
+    qDebug()<<"---------";
     //Rough Division
     QVector<QString> newString;
     for(int i=0; i<beSplit.size(); ++i)
@@ -45,13 +60,18 @@ QVector<QString> MainWindow::splitStr(QString beSplit)
         }
         if(thenum.size())
             newString.push_back(thenum);
-        if(!(beSplit[i].isDigit() || beSplit[i]=='.')) //if is op
+        if(isOpStr(beSplit[i])) //if is op
         {
             QString tmpOp;
             tmpOp = beSplit[i];
             newString.push_back(tmpOp);
+            qDebug()<<"tmop is : "<<tmpOp;
         }
     }
+    qDebug()<<newString[0];
+    qDebug()<<newString[1];
+    qDebug()<<newString[2];
+    //qDebug()<<newString[3];
 
     //return newString;//will be comment
 
@@ -74,32 +94,102 @@ QVector<QString> MainWindow::splitStr(QString beSplit)
         }
     }
     //debug
-    qDebug()<<newString[0];
-    qDebug()<<newString[1];
-    qDebug()<<newString[2];
+//    qDebug()<<newString[0];
+//    qDebug()<<newString[1];
+    qDebug()<<"============================";
 
     return newString;
 
-
-
-
-
 }
-void MainWindow::infixToSuffix()
+
+bool MainWindow::isNumStr(QString str)
 {
-    //QString theExp = ui->lineEdit->text();
-
+    if(str[0].isDigit() || (str[0]=="-"&& str[1].isDigit()))
+        return true;
+    else {
+        return false;
+    }
 }
 
-void MainWindow::initAll()
+void MainWindow::infixToSuffix(QVector<QString> beStack)
 {
-    ifWorkFinished = true;
-    if(!oPStack.isEmpty())
-        oPStack.clear();
-    if(!expOutPutStack.isEmpty())
-        expOutPutStack.clear();
-    oPStack.push('#');
+    qDebug()<<beStack.size();
+    for(int s=0; s<beStack.size(); ++s)
+    {
+        qDebug()<<beStack[s];
+    }
+    qDebug()<<"---------------";
+    //build output stack
+    for(int i=0; i<beStack.size(); ++i)
+    {
+        if(isNumStr(beStack[i]))
+        {
+            expOutPutStack.push(beStack[i]);
+            continue;
+        }else
+        {
+            if(beStack[i][0]=="(")
+            {
+                oPStack.push(beStack[i]);
+                continue;
+            }
+            else if(beStack[i][0]==")")
+            {
+                while(1)
+                {
+                    if(oPStack.top()=="(")
+                    {
+                        oPStack.pop();
+                        break;
+                    }
+                    else {
+                        expOutPutStack.push(oPStack.top());
+                        oPStack.pop();
+                    }
+
+                }
+                continue;
+            }
+            else if(oPStack.size()==0 || getPriority(beStack[i][0])<getPriority(oPStack.top()[0]) || oPStack.top()=="(")
+            {
+                //when the priority of the op to be added
+                //is lower than that of the top of the stack
+                oPStack.push(beStack[i]);
+                continue;
+            } else if(isOpStr(beStack[i][0]) && getPriority(beStack[i][0])>=getPriority(oPStack.top()[0] ) )
+            {
+                while(!oPStack.empty() && getPriority(beStack[i][0])>=getPriority(oPStack.top()[0]))
+                {
+                    expOutPutStack.push(oPStack.top());
+                    oPStack.pop();
+                }
+                oPStack.push(beStack[i]);
+            }
+        }
+    }
+    for(int k=0; k<oPStack.size(); ++k)
+    {
+        if(oPStack.top()=="#")
+            break;
+        expOutPutStack.push(oPStack.pop());
+
+    }
+    //qDebug()<<expOutPutStack;
+    while(1){
+        if(expOutPutStack.empty())
+        {
+            break;
+        }else
+        {
+            qDebug()<<expOutPutStack.top();
+            expOutPutStack.pop();
+        }
+
+    }
+
 }
+
+
 void MainWindow::clickedNum(char num)
 {
     if(ifWorkFinished)
@@ -287,8 +377,10 @@ void MainWindow::on_pushButton_equal_clicked()
 {
     //Press the "=" sign to change the expression on the screen to a suffix expression
     //just for debug ....
-     //QString haha =ui->lineEdit->text();
-     //QVector<QString> yes = splitStr(haha);
+     QString haha =ui->lineEdit->text();
+     QVector<QString> yes = splitStr(haha);
+     infixToSuffix(yes);
+
 
 
 

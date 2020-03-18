@@ -21,9 +21,11 @@ public:
     int getOpPriority(QChar op);
     void initAll();
     void clickedNum(char num);
-    void infixToSuffix();
+    void infixToSuffix(QVector<QString> beStack);
     QVector<QString> splitStr(QString beSplit);
     int getPriority(QChar op);
+    bool isNumStr(QString str);
+    bool isOpStr(QChar str);
 
     ~MainWindow();
 private slots:
@@ -55,19 +57,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-//    bool ifClickedOperator; //mark whether the operator is clicked
-//    bool ifClickedDot;
-//    bool haveNum; //Determine whether a number has been entered
-//    int opFlag; //represents which operator is selected
-//    double result;
-
-//    QString valueA; //
-//    QString valueB;
-//    QString echoResult;
 
     //after modify
     QVector<QString> redesign; //Store split string
-    QStack<QChar> oPStack;
+    QStack<QString> oPStack;
     QStack<QString> expOutPutStack;
     bool ifWorkFinished;
 
