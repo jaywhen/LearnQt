@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStack>
 #include "aboutx.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -13,8 +14,12 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void initButton();
-    void clickNumButton(QString num);
+//    void initButton();
+//    void clickNumButton(QString num);
+    //--------------------------------
+    int getOpPriority(QChar op);
+    void initAll();
+    void clickedNum(char num);
     ~MainWindow();
 private slots:
 
@@ -26,6 +31,10 @@ private slots:
     void on_pushButton_divi_clicked();
     void on_pushButton_dot_clicked();
     void on_pushButton_equal_clicked();
+    void on_pushButton_backSP_clicked();
+    void on_pushButton_leftBracket_clicked();
+    void on_pushButton_rightBracket_clicked();
+
     //numeric button
     void on_pushButton_0_clicked();
     void on_pushButton_1_clicked();
@@ -41,20 +50,20 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    bool ifClickedOperator; //mark whether the operator is clicked
-    bool ifClickedDot;
-    bool haveNum; //Determine whether a number has been entered
-    int opFlag; //represents which operator is selected
-    double result;
+//    bool ifClickedOperator; //mark whether the operator is clicked
+//    bool ifClickedDot;
+//    bool haveNum; //Determine whether a number has been entered
+//    int opFlag; //represents which operator is selected
+//    double result;
 
-    QString valueA; //
-    QString valueB;
-    QString echoResult;
+//    QString valueA; //
+//    QString valueB;
+//    QString echoResult;
 
-    
-    
-
-
+    //after modify
+    QStack<QChar> oPStack;
+    QStack<QChar> expOutPutStack;
+    bool ifWorkFinished;
 
 };
 #endif // MAINWINDOW_H
