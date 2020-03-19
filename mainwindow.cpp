@@ -179,8 +179,9 @@ void MainWindow::infixToSuffix(QVector<QString> beStack)
 
 }
 //now we got a complete output stack
-void MainWindow::caclPostfix()
+int MainWindow::caclPostfix()
 {
+    bool ifStkOverflow = false;
     qDebug()<<"final";
     double num1, num2;
     for(int i=0; i<completeExp.size(); ++i)
@@ -216,12 +217,15 @@ void MainWindow::caclPostfix()
                 num1 = caclStack.pop();
                 if(num2==0)
                 {
-                    qDebug()<<"num2 : "<<num2;
+                    qDebug()<<"num2==0";
+                    qDebug()<<"num1 / num2 : "<<num1<<" / "<<num2;
 
-                    ui->lineEdit->setText("error!divide by zero...");
+                    ifStkOverflow = true;
+                    //caclStack.push("")
+
                 }else{
                     caclStack.push(num1/num2);
-                    qDebug()<<num1/num2;
+                    qDebug()<<"not 0: "<<num1/num2;
 
                 }
 
@@ -230,10 +234,19 @@ void MainWindow::caclPostfix()
         }
 
     }
-    qDebug()<<caclStack.top();
-    QString result =QString("%1").arg(caclStack.top());
-    ui->lineEdit->setText(result);
-    //ui->lineEdit->setText(QString::number(caclStack.top()));
+    if(ifStkOverflow){
+
+        return 0;
+    } else{
+
+        qDebug()<<caclStack.top();
+        QString result =QString("%1").arg(caclStack.top());
+        ui->lineEdit->setText(result);
+        //ui->lineEdit->setText(QString::number(caclStack.top()));
+        return 1;
+
+
+    }
 
 
 }
@@ -245,8 +258,16 @@ void MainWindow::on_pushButton_equal_clicked()
      QString theline =ui->lineEdit->text();
      QVector<QString> suffix = splitStr(theline);
      infixToSuffix(suffix);
-     caclPostfix();
-     initAll();
+     int x = caclPostfix();
+     if(x)
+     {
+         initAll();
+
+
+     }else{
+        ui->lineEdit->setText("error!divide by zero...");
+     }
+
 }
 
 void MainWindow::clickedNum(char num)

@@ -26,7 +26,7 @@ public:
     int getPriority(QChar op);
     bool isNumStr(QString str);
     bool isOpStr(QChar str);
-    void caclPostfix();
+    int caclPostfix();
 
     ~MainWindow();
 private slots:
