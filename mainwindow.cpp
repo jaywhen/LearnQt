@@ -31,7 +31,7 @@ int MainWindow::getPriority(QChar op)
     //op.cell(), returns the cell (least significant byte) of the Unicode character.
     //The smaller the number, the higher the priority
     switch (op.cell()) {
-    case '#': return 3;
+    //case '#': return 3;
     case '+':
     case '-': return 2;
     case 'x':
@@ -214,8 +214,17 @@ void MainWindow::caclPostfix()
             case '/':
                 num2 = caclStack.pop();
                 num1 = caclStack.pop();
-                caclStack.push(num1/num2);
-                qDebug()<<num1/num2;
+                if(num2==0)
+                {
+                    qDebug()<<"num2 : "<<num2;
+
+                    ui->lineEdit->setText("error!divide by zero...");
+                }else{
+                    caclStack.push(num1/num2);
+                    qDebug()<<num1/num2;
+
+                }
+
                 break;
             }
         }
