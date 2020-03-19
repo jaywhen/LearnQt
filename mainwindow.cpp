@@ -20,6 +20,8 @@ void MainWindow::initAll()
         oPStack.clear();
     if(!expOutPutStack.isEmpty())
         expOutPutStack.clear();
+    if(!completeExp.isEmpty())
+        completeExp.clear();
     if(!caclStack.isEmpty())
         caclStack.clear();
     //oPStack.push("#");
@@ -180,7 +182,6 @@ void MainWindow::infixToSuffix(QVector<QString> beStack)
 void MainWindow::caclPostfix()
 {
     qDebug()<<"final";
-
     double num1, num2;
     for(int i=0; i<completeExp.size(); ++i)
     {
@@ -193,26 +194,26 @@ void MainWindow::caclPostfix()
             //if is op,
             switch (completeExp[i][0].cell()) {
             case '+':
-                num1 = caclStack.pop();
                 num2 = caclStack.pop();
+                num1 = caclStack.pop();
                 caclStack.push(num1+num2);
                 qDebug()<<num1+num2;
                 break;
             case '-':
-                num1 = caclStack.pop();
                 num2 = caclStack.pop();
+                num1 = caclStack.pop();
                 caclStack.push(num1-num2);
                 qDebug()<<num1-num2;
                 break;
             case 'x':
-                num1 = caclStack.pop();
                 num2 = caclStack.pop();
+                num1 = caclStack.pop();
                 caclStack.push(num1*num2);
                 qDebug()<<num1*num2;
                 break;
             case '/':
-                num1 = caclStack.pop();
                 num2 = caclStack.pop();
+                num1 = caclStack.pop();
                 caclStack.push(num1/num2);
                 qDebug()<<num1/num2;
                 break;
@@ -223,6 +224,7 @@ void MainWindow::caclPostfix()
     qDebug()<<caclStack.top();
     QString result =QString("%1").arg(caclStack.top());
     ui->lineEdit->setText(result);
+    //ui->lineEdit->setText(QString::number(caclStack.top()));
 
 
 }
@@ -231,10 +233,11 @@ void MainWindow::on_pushButton_equal_clicked()
     //Press the "=" sign to change the expression on the screen to a suffix expression
     //just for debug ....
 
-     QString haha =ui->lineEdit->text();
-     QVector<QString> yes = splitStr(haha);
-     infixToSuffix(yes);
+     QString theline =ui->lineEdit->text();
+     QVector<QString> suffix = splitStr(theline);
+     infixToSuffix(suffix);
      caclPostfix();
+     initAll();
 }
 
 void MainWindow::clickedNum(char num)
@@ -327,7 +330,7 @@ void MainWindow::on_pushButton_add_clicked()
 }
 void MainWindow::on_pushButton_sub_clicked()
 {
-    //一开始就按-号，做负数显示
+    //一开始就按-号，做负号显示
     if(ifWorkFinished)
     {
         ui->lineEdit->setText("-");
@@ -370,72 +373,43 @@ void MainWindow::on_pushButton_divi_clicked()
 
 void MainWindow::on_pushButton_0_clicked()
 {
-
     clickedNum('0');
-
 }
 void MainWindow::on_pushButton_1_clicked()
 {
-
     clickedNum('1');
-
 }
 void MainWindow::on_pushButton_2_clicked()
 {
-
     clickedNum('2');
-
-
-
 }
 void MainWindow::on_pushButton_3_clicked()
 {
-
     clickedNum('3');
-
-
-
 }
 void MainWindow::on_pushButton_4_clicked()
 {
-
     clickedNum('4');
-
-
-
 }
 void MainWindow::on_pushButton_5_clicked()
 {
-
     clickedNum('5');
-
-
 }
 void MainWindow::on_pushButton_6_clicked()
 {
-
     clickedNum('6');
-
-
 }
 void MainWindow::on_pushButton_7_clicked()
 {
-
     clickedNum('7');
-
-
 }
 void MainWindow::on_pushButton_8_clicked()
 {
-
     clickedNum('8');
-
 }
 void MainWindow::on_pushButton_9_clicked()
 {
-
     clickedNum('9');
-
 }
 //menu bar
 void MainWindow::on_actionWhat_is_XCalc_triggered()
@@ -443,7 +417,6 @@ void MainWindow::on_actionWhat_is_XCalc_triggered()
     AboutX *ab = new AboutX();
     ab->setWindowTitle("About me");
     ab->show();
-
 }
 MainWindow::~MainWindow()
 {
