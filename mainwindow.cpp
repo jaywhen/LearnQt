@@ -1,6 +1,33 @@
+/* Author: Xiang Jiewen;    Date: 2020.03.18;
+ *
+ * Note:
+ * XCacl's core code are all there, so
+ * If you are reading the whole program for the first time
+ * and want to quickly grasp the logic of the whole program,
+ * i recommended to read the following functions directly:
+ * -----------------------------------------------
+ * QVector<QString> splitStr(QString beSplit);   |
+ * void infixToSuffix(QVector<QString> beStack); |
+ * int caclPostfix();                            |
+ * -----------------------------------------------
+ *
+ * There are many bugs hidden in this program,
+ * if(you find them)
+ * {
+ *      please issues me on the github:
+ *      https://github.com/jaywhen/XCalc/issues
+ *      Thank you!
+ * }
+ *
+ * For more information of this program, please check the
+ * README.md file
+ * That's all, stay at home, we can defeat the virus!
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -13,6 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->lineEdit->setText("0");                   //set init word as "0"
     initAll();
 }
+
+//set all stat init
 void MainWindow::initAll()
 {
     ifWorkFinished = true;
@@ -24,14 +53,13 @@ void MainWindow::initAll()
         completeExp.clear();
     if(!caclStack.isEmpty())
         caclStack.clear();
-    //oPStack.push("#");
 }
+
 int MainWindow::getPriority(QChar op)
 {
     //op.cell(), returns the cell (least significant byte) of the Unicode character.
     //The smaller the number, the higher the priority
     switch (op.cell()) {
-    //case '#': return 3;
     case '+':
     case '-': return 2;
     case 'x':
@@ -41,6 +69,8 @@ int MainWindow::getPriority(QChar op)
     }
     return 0;
 }
+
+//just some bools ------------------------------------
 bool MainWindow::isOpStr(QChar str)
 {
     if(str=='+' || str=='-' || str=='x' || str=='/' || '(' || ')')
@@ -48,6 +78,17 @@ bool MainWindow::isOpStr(QChar str)
     else
         return false;
 }
+
+bool MainWindow::isNumStr(QString str)
+{
+    if(str[0].isDigit() || (str[0]=="-"&& str[1].isDigit()))
+        return true;
+    else
+        return false;
+}
+//bools over -----------------------------------------
+
+//the core code --------------------------------------
 QVector<QString> MainWindow::splitStr(QString beSplit)
 {
     qDebug()<<beSplit;
@@ -105,14 +146,6 @@ QVector<QString> MainWindow::splitStr(QString beSplit)
 
 }
 
-bool MainWindow::isNumStr(QString str)
-{
-    if(str[0].isDigit() || (str[0]=="-"&& str[1].isDigit()))
-        return true;
-    else {
-        return false;
-    }
-}
 
 void MainWindow::infixToSuffix(QVector<QString> beStack)
 {
@@ -248,8 +281,8 @@ int MainWindow::caclPostfix()
 
     }
 
-
 }
+
 void MainWindow::on_pushButton_equal_clicked()
 {
     //Press the "=" sign to change the expression on the screen to a suffix expression
@@ -262,52 +295,15 @@ void MainWindow::on_pushButton_equal_clicked()
      if(x)
      {
          initAll();
-
-
      }else{
         ui->lineEdit->setText("error!divide by zero...");
      }
 
 }
 
-void MainWindow::clickedNum(char num)
-{
-    if(ifWorkFinished)
-    {
-        ui->lineEdit->setText(QString(num));
-        ifWorkFinished=false;
-    }else
-    {
-        QString theLine = ui->lineEdit->text();
-        ui->lineEdit->setText(theLine+num);
-    }
+//the core code over----------------------------------
 
-}
-
-
-void MainWindow::on_pushButton_AC_clicked()
-{
-    ui->lineEdit->setText("0");
-    initAll();
-
-}
-
-
-
-
-void MainWindow::on_pushButton_dot_clicked()
-{
-    if(ifWorkFinished)
-    {
-        //ui->lineEdit->setText("You start with . !?");
-        initAll();
-    }else {
-        QString theline = ui->lineEdit->text();
-        ui->lineEdit->setText(theline+".");
-        ifWorkFinished = false;
-    }
-
-}
+//ops ---------------------------------------------
 void MainWindow::on_pushButton_leftBracket_clicked()
 {
     if(ifWorkFinished)
@@ -320,9 +316,8 @@ void MainWindow::on_pushButton_leftBracket_clicked()
         ifWorkFinished = false;
     }
 
-
-
 }
+
 void MainWindow::on_pushButton_rightBracket_clicked()
 {
     if(ifWorkFinished)
@@ -336,6 +331,7 @@ void MainWindow::on_pushButton_rightBracket_clicked()
     }
 
 }
+
 void MainWindow::on_pushButton_backSP_clicked()
 {
     QString theline = ui->lineEdit->text();
@@ -358,6 +354,7 @@ void MainWindow::on_pushButton_add_clicked()
     }
 
 }
+
 void MainWindow::on_pushButton_sub_clicked()
 {
     //一开始就按-号，做负号显示
@@ -372,6 +369,7 @@ void MainWindow::on_pushButton_sub_clicked()
     }
 
 }
+
 void MainWindow::on_pushButton_mult_clicked()
 {
     if(ifWorkFinished)
@@ -387,6 +385,7 @@ void MainWindow::on_pushButton_mult_clicked()
     }
 
 }
+
 void MainWindow::on_pushButton_divi_clicked()
 {
     if(ifWorkFinished)
@@ -396,6 +395,43 @@ void MainWindow::on_pushButton_divi_clicked()
     }else {
         QString theline = ui->lineEdit->text();
         ui->lineEdit->setText(theline+"/");
+        ifWorkFinished = false;
+    }
+
+}
+
+void MainWindow::on_pushButton_AC_clicked()
+{
+    ui->lineEdit->setText("0");
+    initAll();
+
+}
+//ops over ----------------------------------------
+
+// nums -------------------------------------------
+void MainWindow::clickedNum(char num)
+{
+    if(ifWorkFinished)
+    {
+        ui->lineEdit->setText(QString(num));
+        ifWorkFinished=false;
+    }else
+    {
+        QString theLine = ui->lineEdit->text();
+        ui->lineEdit->setText(theLine+num);
+    }
+
+}
+
+void MainWindow::on_pushButton_dot_clicked()
+{
+    if(ifWorkFinished)
+    {
+        //ui->lineEdit->setText("You start with . !?");
+        initAll();
+    }else {
+        QString theline = ui->lineEdit->text();
+        ui->lineEdit->setText(theline+".");
         ifWorkFinished = false;
     }
 
@@ -441,6 +477,8 @@ void MainWindow::on_pushButton_9_clicked()
 {
     clickedNum('9');
 }
+//nums over--------------------------------
+
 //menu bar
 void MainWindow::on_actionWhat_is_XCalc_triggered()
 {

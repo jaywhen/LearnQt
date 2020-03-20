@@ -1,10 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-//#include <iostream>
+
 #include <QMainWindow>
 #include <QStack>
-//#include <unistd.h>
 #include "aboutx.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -15,18 +15,17 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-//    void initButton();
-//    void clickNumButton(QString num);
+
     //--------------------------------
-    int getOpPriority(QChar op);
     void initAll();
     void clickedNum(char num);
-    void infixToSuffix(QVector<QString> beStack);
     QVector<QString> splitStr(QString beSplit);
+    void infixToSuffix(QVector<QString> beStack);
+    int caclPostfix();
     int getPriority(QChar op);
     bool isNumStr(QString str);
     bool isOpStr(QChar str);
-    int caclPostfix();
+
 
     ~MainWindow();
 private slots:
@@ -54,6 +53,8 @@ private slots:
     void on_pushButton_7_clicked();
     void on_pushButton_8_clicked();
     void on_pushButton_9_clicked();
+
+    //menu button
     void on_actionWhat_is_XCalc_triggered();
 
 private:
