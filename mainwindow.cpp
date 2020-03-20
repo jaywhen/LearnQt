@@ -8,7 +8,7 @@
  * -----------------------------------------------
  * QVector<QString> splitStr(QString beSplit);   |
  * void infixToSuffix(QVector<QString> beStack); |
- * int caclPostfix();                            |
+ * Stat caclPostfix();                            |
  * -----------------------------------------------
  *
  * There are many bugs hidden in this program,
@@ -212,7 +212,7 @@ void MainWindow::infixToSuffix(QVector<QString> beStack)
 
 }
 //now we got a complete output stack
-int MainWindow::caclPostfix()
+Stat MainWindow::caclPostfix()
 {
     bool ifStkOverflow = false;
     qDebug()<<"final";

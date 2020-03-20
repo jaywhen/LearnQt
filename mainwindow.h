@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QStack>
 #include "aboutx.h"
+#define Stat int
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,12 +21,13 @@ public:
     //--------------------------------
     void initAll();
     void clickedNum(char num);
-    QVector<QString> splitStr(QString beSplit);
-    void infixToSuffix(QVector<QString> beStack);
-    int caclPostfix();
-    int getPriority(QChar op);
     bool isNumStr(QString str);
     bool isOpStr(QChar str);
+
+    int getPriority(QChar op);
+    QVector<QString> splitStr(QString beSplit);
+    void infixToSuffix(QVector<QString> beStack);
+    Stat caclPostfix();
 
 
     ~MainWindow();
