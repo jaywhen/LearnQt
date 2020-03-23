@@ -542,8 +542,15 @@ void MainWindow::on_pushButton_dot_clicked()
 {
     if(ifWorkFinished)
     {
-        //ui->lineEdit->setText("You start with . !?");
-        initAll();
+        if(ui->lineEdit->text()=='0')
+        {
+            ui->lineEdit->setText("0");
+            ifWorkFinished = true;
+        }else {
+            QString theline = ui->lineEdit->text();
+            ui->lineEdit->setText(theline+".");
+            ifWorkFinished = false;
+        }
     }else {
         QString theline = ui->lineEdit->text();
         ui->lineEdit->setText(theline+".");
