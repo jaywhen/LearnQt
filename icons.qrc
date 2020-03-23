@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/cacl.ico</file>
+        <file>icons/caclf.png</file>
+        <file>icons/cacls.png</file>
+    </qresource>
+</RCC>

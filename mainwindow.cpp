@@ -33,7 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle("XClc");
+    setWindowTitle("XCacl");
+    setWindowIcon(QIcon(":/icons/caclf.png"));
     ui->lineEdit->setEnabled(false);
     ui->lineEdit->setAlignment(Qt::AlignRight);   //Set display right
     ui->lineEdit->setStyleSheet("font-size:24px");//set font size as 24 px
