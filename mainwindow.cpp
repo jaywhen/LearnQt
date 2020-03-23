@@ -359,6 +359,8 @@ void MainWindow::on_pushButton_backSP_clicked()
 
 }
 
+
+//This version of the function cannot be evaluated continuously
 //void MainWindow::on_pushButton_add_clicked()
 //{
 //    //如果一开始就按+号
@@ -402,15 +404,39 @@ void MainWindow::on_pushButton_add_clicked()
 
 
 
+//This version of the function cannot be evaluated continuously
+//void MainWindow::on_pushButton_sub_clicked()
+//{
+//    //一开始就按-号，做负号显示
+//    if(ifWorkFinished)
+//    {
+
+//        ui->lineEdit->setText("-");
+//        ifWorkFinished = false;
+//    }else{
+//        QString theline = ui->lineEdit->text();
+//        ui->lineEdit->setText(theline+"-");
+//        ifWorkFinished = false;
+//    }
+
+//}
 
 void MainWindow::on_pushButton_sub_clicked()
 {
-    //一开始就按-号，做负号显示
+    //The current screen value is 0, press - to do - processing
+    //当前屏幕数值为0,按下-号，做-号处理
     if(ifWorkFinished)
     {
+        if(ui->lineEdit->text()=='0')
+        {
+            ui->lineEdit->setText("-");
+            ifWorkFinished = false;
+        }else {
+            QString theline = ui->lineEdit->text();
+            ui->lineEdit->setText(theline+"-");
+            ifWorkFinished = false;
+        }
 
-        ui->lineEdit->setText("-");
-        ifWorkFinished = false;
     }else{
         QString theline = ui->lineEdit->text();
         ui->lineEdit->setText(theline+"-");
@@ -419,12 +445,24 @@ void MainWindow::on_pushButton_sub_clicked()
 
 }
 
+
+
+
+
+
 void MainWindow::on_pushButton_mult_clicked()
 {
     if(ifWorkFinished)
     {
-        //ui->lineEdit->setText("You start with x !?");
-        initAll();
+        if(ui->lineEdit->text()=='0')
+        {
+            ui->lineEdit->setText("0");
+            ifWorkFinished = true;
+        }else {
+            QString theline = ui->lineEdit->text();
+            ui->lineEdit->setText(theline+"x");
+            ifWorkFinished = false;
+        }
     }else {
         QString theline = ui->lineEdit->text();
         ui->lineEdit->setText(theline+"x");
@@ -435,12 +473,35 @@ void MainWindow::on_pushButton_mult_clicked()
 
 }
 
+//This version of the function cannot be evaluated continuously
+//void MainWindow::on_pushButton_divi_clicked()
+//{
+//    if(ifWorkFinished)
+//    {
+//        //ui->lineEdit->setText("You start with ÷ !?");
+//        initAll();
+
+//    }else {
+//        QString theline = ui->lineEdit->text();
+//        ui->lineEdit->setText(theline+"/");
+//        ifWorkFinished = false;
+//    }
+
+//}
+
 void MainWindow::on_pushButton_divi_clicked()
 {
     if(ifWorkFinished)
     {
-        //ui->lineEdit->setText("You start with ÷ !?");
-        initAll();
+        if(ui->lineEdit->text()=='0')
+        {
+            ui->lineEdit->setText("0");
+            ifWorkFinished = true;
+        }else {
+            QString theline = ui->lineEdit->text();
+            ui->lineEdit->setText(theline+"/");
+            ifWorkFinished = false;
+        }
 
     }else {
         QString theline = ui->lineEdit->text();
@@ -449,6 +510,10 @@ void MainWindow::on_pushButton_divi_clicked()
     }
 
 }
+
+
+
+
 
 void MainWindow::on_pushButton_AC_clicked()
 {
