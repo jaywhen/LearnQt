@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("XCacl");
-    setWindowIcon(QIcon(":/icons/caclf.png"));
+    setWindowIcon(QIcon(":/icons/cacls.png"));
     ui->lineEdit->setEnabled(false);
     ui->lineEdit->setAlignment(Qt::AlignRight);   //Set display right
     ui->lineEdit->setStyleSheet("font-size:24px");//set font size as 24 px
@@ -198,9 +198,26 @@ void MainWindow::infixToSuffix(QVector<QString> beStack)
             }
         }
     }
-    for(int k=0; k<oPStack.size(); ++k)
+    //for debug
+    qDebug()<<"opstk have: ";
+    for(int nn=0; nn<oPStack.size(); ++nn)
     {
-        //qDebug()<<oPStack.top()<<";";
+        qDebug()<<oPStack[nn];
+    }
+    qDebug()<<"outputstk have:";
+    for(int nnm=0; nnm<expOutPutStack.size(); ++nnm)
+    {
+        qDebug()<<expOutPutStack[nnm];
+    }
+    qDebug()<<"over -----";
+    //now opstk and outputstk is all good
+
+    qDebug()<<"opstk size is :"<<oPStack.size();
+    int opStkSize = oPStack.size();
+    for(int k=0; k<opStkSize; ++k)
+    {
+        qDebug()<<oPStack.top()<<";";
+
         expOutPutStack.push(oPStack.pop());
     }
 
@@ -218,6 +235,7 @@ Stat MainWindow::caclPostfix()
     bool ifStkOverflow = false;
     qDebug()<<"final";
     double num1, num2;
+    qDebug()<<completeExp.last();
     for(int i=0; i<completeExp.size(); ++i)
     {
         //if is num, just push in stack
@@ -289,16 +307,17 @@ void MainWindow::on_pushButton_equal_clicked()
     //Press the "=" sign to change the expression on the screen to a suffix expression
     //just for debug ....
 
-     QString theline =ui->lineEdit->text();
-     QVector<QString> suffix = splitStr(theline);
-     infixToSuffix(suffix);
-     int x = caclPostfix();
-     if(x)
-     {
-         initAll();
-     }else{
+    QString theline =ui->lineEdit->text();
+    QVector<QString> suffix = splitStr(theline);
+    infixToSuffix(suffix);
+    int x = caclPostfix();
+    if(x)
+    {
+        initAll();
+    }else{
         ui->lineEdit->setText("error!divide by zero...");
-     }
+    }
+
 
 }
 
@@ -340,30 +359,59 @@ void MainWindow::on_pushButton_backSP_clicked()
 
 }
 
+//void MainWindow::on_pushButton_add_clicked()
+//{
+//    //如果一开始就按+号
+//    if(ifWorkFinished){
+//        ui->lineEdit->setText("");
+//        initAll();
+//        ifWorkFinished = false;
+//    }else {
+//        QString theline = ui->lineEdit->text();
+//        ui->lineEdit->setText(theline+"+");
+//        ifWorkFinished = false;
+
+//    }
+
+//}
+
+
 void MainWindow::on_pushButton_add_clicked()
 {
     //如果一开始就按+号
     if(ifWorkFinished){
-        ui->lineEdit->setText("");
-        initAll();
-        ifWorkFinished = false;
+        if(ui->lineEdit->text()=='0')
+        {
+            ui->lineEdit->setText("0");
+            ifWorkFinished = true;
+        }else {
+            QString theline = ui->lineEdit->text();
+            ui->lineEdit->setText(theline+"+");
+            ifWorkFinished = false;
+        }
     }else {
         QString theline = ui->lineEdit->text();
         ui->lineEdit->setText(theline+"+");
         ifWorkFinished = false;
-
     }
 
 }
+
+
+
+
+
+
 
 void MainWindow::on_pushButton_sub_clicked()
 {
     //一开始就按-号，做负号显示
     if(ifWorkFinished)
     {
+
         ui->lineEdit->setText("-");
         ifWorkFinished = false;
-    }else {
+    }else{
         QString theline = ui->lineEdit->text();
         ui->lineEdit->setText(theline+"-");
         ifWorkFinished = false;
@@ -393,6 +441,7 @@ void MainWindow::on_pushButton_divi_clicked()
     {
         //ui->lineEdit->setText("You start with ÷ !?");
         initAll();
+
     }else {
         QString theline = ui->lineEdit->text();
         ui->lineEdit->setText(theline+"/");
