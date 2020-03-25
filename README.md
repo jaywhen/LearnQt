@@ -7,9 +7,9 @@
 
 [项目主页](https://jaywhen.com/post/xcacl/)
 
-> XCalc是一个基于Qt开发的简单计算器桌面程序，能够进行简单的四则运算，可持续计算。
-
+> XCalc是一个基于Qt开发的简单计算器桌面程序，能够进行简单的四则运算，可持续计算、从键盘>  读取输入等功能。
 ### 开发环境
+
 * Qt5
 * gcc 9.2.1(Arch Linux)
   <a name="En"/>
@@ -28,4 +28,3 @@ English|[简体中文](#Ch)
 
 * Qt5
 * gcc 9.2.1(Arch Linux)
-

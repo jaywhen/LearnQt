@@ -601,6 +601,34 @@ void MainWindow::on_pushButton_9_clicked()
 }
 //nums over--------------------------------
 
+//add new: Read keyboard input
+void MainWindow::keyPressEvent(QKeyEvent *ev)
+{
+
+    switch (ev->key()) {
+    case Qt::Key_0: on_pushButton_0_clicked();break;
+    case Qt::Key_1: on_pushButton_1_clicked();break;
+    case Qt::Key_2: on_pushButton_2_clicked();break;
+    case Qt::Key_3: on_pushButton_3_clicked();break;
+    case Qt::Key_4: on_pushButton_4_clicked();break;
+    case Qt::Key_5: on_pushButton_5_clicked();break;
+    case Qt::Key_6: on_pushButton_6_clicked();break;
+    case Qt::Key_7: on_pushButton_7_clicked();break;
+    case Qt::Key_8: on_pushButton_8_clicked();break;
+    case Qt::Key_9: on_pushButton_9_clicked();break;
+    case Qt::Key_Backspace: on_pushButton_backSP_clicked();break;
+    case Qt::Key_Plus: on_pushButton_add_clicked();break;
+    case Qt::Key_Minus: on_pushButton_sub_clicked();break;
+    case Qt::Key_Asterisk: on_pushButton_mult_clicked();break;
+    case Qt::Key_Slash: on_pushButton_divi_clicked();break;
+    case Qt::Key_Equal: on_pushButton_equal_clicked();break;
+    case Qt::Key_ParenLeft: on_pushButton_leftBracket_clicked();break;
+    case Qt::Key_ParenRight: on_pushButton_rightBracket_clicked();break;
+    }
+}
+//read kb over
+
+
 //menu bar
 void MainWindow::on_actionWhat_is_XCalc_triggered()
 {

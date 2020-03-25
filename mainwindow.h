@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QStack>
+#include <QKeyEvent>
 #include "aboutx.h"
 #define Stat int
 
@@ -28,6 +29,7 @@ public:
     QVector<QString> splitStr(QString beSplit);
     void infixToSuffix(QVector<QString> beStack);
     Stat caclPostfix();
+    void keyPressEvent(QKeyEvent *ev);
 
 
     ~MainWindow();
