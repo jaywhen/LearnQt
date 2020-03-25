@@ -2,24 +2,32 @@
 ![sreenshot](https://github.com/jaywhen/XCalc/blob/master/XCalc_Image/v1_0.png)
 
 简体中文|[English](#En)
+
 [项目主页](https://jaywhen.com/post/xcacl/)
 
-## 开发环境
+> XCalc是一个基于Qt开发的简单计算器桌面程序，能够进行简单的四则运算，可持续计算。
+
+开发环境
 * Qt5
+
 * gcc 9.2.1(Arch Linux)
-<a name="En"/>
+  <a name="En"/>
 
+  
 
+--------
 
 English|[简体中文](#Ch)
 
-> XCalc is a simple calculator followed by KCalc, 
-> cause I have little talent and less learning so there just only a few 
-> functions have been completed.
 
-## Development Enviroment
 
 [Home](https://jaywhen.com/post/xcacl/)
 
+> XCalc is a simple calculator followed by KCalc.
+> It can carry out four simple operations and sustainable calculation.
+
+## Development Enviroment
+
 * Qt5
 * gcc 9.2.1(Arch Linux)
+
