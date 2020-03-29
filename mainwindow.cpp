@@ -23,7 +23,6 @@
  * README.md file
  * That's all, stay at home, we can defeat the virus!
  */
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
@@ -561,6 +560,8 @@ void MainWindow::on_pushButton_dot_clicked()
 
 void MainWindow::on_pushButton_0_clicked()
 {
+//    QMainWindow *w1 = new QMainWindow();
+//    w1->show();
     clickedNum('0');
 }
 void MainWindow::on_pushButton_1_clicked()
@@ -635,6 +636,8 @@ void MainWindow::on_actionWhat_is_XCalc_triggered()
     AboutX *ab = new AboutX();
     ab->setWindowTitle("About me");
     ab->show();
+    //Release on delete
+    ab->setAttribute(Qt::WA_DeleteOnClose);
 }
 MainWindow::~MainWindow()
 {
