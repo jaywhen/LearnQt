@@ -3,6 +3,7 @@
 <a name="Ch"/>
 
 简体中文|[English](#En)
+
 ![sreenshot](https://github.com/jaywhen/XCalc/blob/master/XCalc_Image/v1_0.png)
 
 [项目主页](https://jaywhen.com/post/xcacl/)
