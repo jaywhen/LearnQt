@@ -12,10 +12,21 @@
 
 * Qt5
 * gcc 9.2.1(Arch Linux)
-  <a name="En"/>
 
   
+### 构建与使用
 
+```
+git clone https://github.com/jaywhen/XCalc.git
+cd XCalc && qmake && make
+./XCalc
+```
+
+
+
+
+
+ <a name="En"/>
 --------
 English|[简体中文](#Ch)
 
@@ -28,3 +39,10 @@ English|[简体中文](#Ch)
 
 * Qt5
 * gcc 9.2.1(Arch Linux)
+
+### build
+```
+git clone https://github.com/jaywhen/XCalc.git
+cd XCalc && qmake && make
+./XCalc
+```
