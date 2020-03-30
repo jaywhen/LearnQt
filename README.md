@@ -13,7 +13,6 @@
 * Qt5
 * gcc 9.2.1(Arch Linux)
 
-  
 ### 构建与使用
 
 ```
@@ -22,11 +21,8 @@ cd XCalc && qmake && make
 ./XCalc
 ```
 
+<a name="En"/>
 
-
-
-
- <a name="En"/>
 --------
 English|[简体中文](#Ch)
 
