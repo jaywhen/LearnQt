@@ -23,8 +23,8 @@
 
 两种写法：
 
-```
+```c++
 connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
-connect(closeButton, &QPushButton::clicked, this, &FindDialog::c;lose);
+connect(closeButton, &QPushButton::clicked, this, &FindDialog::close);
 //connect(信号的发送者，信号函数的地址，信号的接收者，槽的地址)；
 ```
