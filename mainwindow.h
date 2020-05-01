@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QStack>
 #include <QKeyEvent>
-#include "aboutx.h"
+#include <QMessageBox>
 #define Stat int
 
 
@@ -61,6 +61,9 @@ private slots:
 
     //menu button
     void on_actionWhat_is_XCalc_triggered();
+
+    //about
+    void about();
 
 private:
     Ui::MainWindow *ui;

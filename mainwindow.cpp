@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setCentralWidget(ui->centralwidget);
     setWindowTitle("XCacl");
     setWindowIcon(QIcon(":/icons/cacls.png"));
     ui->lineEdit->setEnabled(false);
@@ -629,15 +630,20 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
 }
 //read kb over
 
-
+void MainWindow::about()
+{
+    QMessageBox::about(this, tr("About XCacl"),
+                       tr("<h2>XCacl 2.0</h2>"
+                          "<p>XCalc 计算器"
+                          "<p><a href=\"https://github.com/jaywhen/XCalc\">代码地址</a>"
+                          "<p><a href=\"https://jaywhen.com/\">作者主页</a>"
+                          "<p>代码重构中．．．"
+                          ));
+}
 //menu bar
 void MainWindow::on_actionWhat_is_XCalc_triggered()
 {
-    AboutX *ab = new AboutX();
-    ab->setWindowTitle("About me");
-    ab->show();
-    //Release on delete
-    ab->setAttribute(Qt::WA_DeleteOnClose);
+    this->about();
 }
 MainWindow::~MainWindow()
 {
