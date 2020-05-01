@@ -1,7 +1,12 @@
 # Noob Note
 
 * 格式化代码：`ctrl` + `i`
+
 * `F1`查看定义
+
+* `ctrl`+`鼠标左键`点击的函数在定义与实现中切换
+
+  
 
 
 # Qt QML GUI Programing
