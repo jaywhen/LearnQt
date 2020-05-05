@@ -1,3 +1,8 @@
+/*
+ * FileName:cell.h
+ * Name: Xiang Jiewen  Student-ID: 2018051604079
+ * Class: SE.class 3
+ */
 #ifndef CELL_H
 #define CELL_H
 

@@ -3,15 +3,13 @@
  * Name: Xiang Jiewen  Student-ID: 2018051604079
  * Class: SE.class 3
  */
+#include "finddialog.h"
+#include "spreadsheet.h"
+#include "gotocelldialog.h"
+#include "sortdialog.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "spreadsheet.h"
-#include <QSettings>
-#include <QFile>
-#include <QFileInfo>
-#include <QFileDialog>
-#include <QDebug>
-#include <QLabel>
+#include <QtWidgets>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,8 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     spreadsheet = new Spreadsheet;
     setCentralWidget(spreadsheet);
 
-    setActions();
-    setMenus();
+    setRecentFileActions();
     readSettings();
 
     findDialog = 0;
@@ -36,30 +33,31 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setActions()
+
+
+void MainWindow::setRecentFileActions()
 {
+    //set recentfile actions
     for (int i = 0; i < MaxRecentFiles; ++i) {
         recentFileActions[i] = new QAction(this);
         recentFileActions[i]->setVisible(false);
         connect(recentFileActions[i], SIGNAL(triggered()),
                 this, SLOT(openRecentFile()));
     }
-
-}
-
-void MainWindow::setMenus()
-{
+    //add recentfile actions to menuFile
     for (int i = 0; i < MaxRecentFiles; ++i)
-        ui->menuFile->addAction(recentFileActions[i]);
+            ui->menuFile->addAction(recentFileActions[i]);
+
 }
 
-//void MainWindow::setContextMenu()
-//{
-//    spreadsheet->addAction(ui->actionCut);
-//    spreadsheet->addAction(ui->actionCopy);
-//    spreadsheet->addAction(ui->actionPaset);
-//    spreadsheet->setContextMenuPolicy(Qt::ActionsContextMenu);
-//}
+void MainWindow::openRecentFile()
+{
+    if (okToContinue()) {
+        QAction *action = qobject_cast<QAction *>(sender());
+        if (action)
+            loadFile(action->data().toString());
+    }
+}
 
 bool MainWindow::okToContinue()
 {
@@ -77,34 +75,6 @@ bool MainWindow::okToContinue()
     }
     return true;
 }
-
-//void MainWindow::updateStatusBar()
-//{
-//    locationLabel->setText(spreadsheet->currentLocation());
-//    formulaLabel->setText(spreadsheet->currentFormula());
-//}
-
-//void MainWindow::setStatusBar()
-//{
-
-//    locationLabel = new QLabel(" W999 ");
-//    locationLabel->setAlignment(Qt::AlignHCenter);
-//    locationLabel->setMinimumSize(locationLabel->sizeHint());
-
-//    formulaLabel = new QLabel;
-//    formulaLabel->setIndent(3);
-
-//    ui->statusbar->addWidget(locationLabel);
-//    ui->statusbar->addWidget(formulaLabel, 1);
-
-//    connect(spreadsheet, SIGNAL(currentCellChanged(int, int, int, int)),
-//            this, SLOT(updateStatusBar()));
-//    connect(spreadsheet, SIGNAL(modified()),
-//            this, SLOT(spreadsheetModified()));
-
-//    updateStatusBar();
-
-//}
 
 void MainWindow::readSettings()
 {
@@ -158,7 +128,6 @@ void MainWindow::updateRecentFileActions()
 
 }
 
-
 QString MainWindow::strippedName(const QString &fullFileName)
 {
     return QFileInfo(fullFileName).fileName();
@@ -181,6 +150,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     setWindowTitle(tr("%1[*] - %2").arg(shownName)
                                    .arg(tr("XSpreadsheet")));
 }
+
 void MainWindow::newFile()
 {
     if (okToContinue()) {
@@ -221,15 +191,6 @@ bool MainWindow::saveFile(const QString &fileName)
     return true;
 }
 
-void MainWindow::openRecentFile()
-{
-    if (okToContinue()) {
-        QAction *action = qobject_cast<QAction *>(sender());
-        if (action)
-            loadFile(action->data().toString());
-    }
-}
-
 bool MainWindow::loadFile(const QString &fileName)
 {
     if (!spreadsheet->readFile(fileName)) {
@@ -242,7 +203,6 @@ bool MainWindow::loadFile(const QString &fileName)
     return true;
 }
 
-
 void MainWindow::goToCell()
 {
     GoToCellDialog dialog(this);
@@ -252,6 +212,7 @@ void MainWindow::goToCell()
                                     str[0].unicode() - 'A');
     }
 }
+
 void MainWindow::sort()
 {
     SortDialog dialog(this);

@@ -13,7 +13,8 @@ FindDialog::FindDialog(QWidget *parent) :
     ui->setupUi(this);
     ui->findButton->setEnabled(false);
     setWindowTitle(tr("Find"));
-
+    setFixedHeight(this->height());
+    setFixedWidth(this->width());
 }
 
 FindDialog::~FindDialog()

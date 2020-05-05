@@ -1,3 +1,8 @@
+/*
+ * FileName:sortdialog.cpp
+ * Name: Xiang Jiewen  Student-ID: 2018051604079
+ * Class: SE.class 3
+ */
 #ifndef SORTDIALOG_H
 #define SORTDIALOG_H
 

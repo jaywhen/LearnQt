@@ -1,11 +1,17 @@
+/*
+ * FileName:spreadsheet.h
+ * Name: Xiang Jiewen  Student-ID: 2018051604079
+ * Class: SE.class 3
+ */
 #ifndef SPREADSHEET_H
 #define SPREADSHEET_H
 
-#include <QTableWidget>
 #include <QApplication>
-#include <QMessageBox>
 #include "cell.h"
+
 QT_BEGIN_NAMESPACE
+class QTableWidget;
+class QMessageBox;
 class SpreadsheetCompare;
 QT_END_NAMESPACE
 

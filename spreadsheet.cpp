@@ -1,6 +1,10 @@
-#include <QtWidgets>
+/*
+ * FileName:spreadsheet.cpp
+ * Name: Xiang Jiewen  Student-ID: 2018051604079
+ * Class: SE.class 3
+ */
 
-#include "cell.h"
+#include <QtWidgets>
 #include "spreadsheet.h"
 
 Spreadsheet::Spreadsheet(QWidget *parent)

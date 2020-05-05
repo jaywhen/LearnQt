@@ -5,17 +5,14 @@
  */
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include <QMainWindow>
-#include "finddialog.h"
-#include "spreadsheet.h"
-#include "gotocelldialog.h"
-#include "sortdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 class QAction;
 class QLabel;
+class FindDialog;
+class Spreadsheet;
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -94,11 +91,10 @@ private:
     void writeSettings();
     void setCurrentFile(const QString &fileName);
     void updateRecentFileActions();
-    void setActions();
-    void setContextMenu();
-    bool loadFile(const QString &fileName);
-    void setMenus();
+    void setRecentFileActions();
     void setStatusBar();
+    bool loadFile(const QString &fileName);
+
 
 
 };

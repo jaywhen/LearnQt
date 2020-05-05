@@ -1,3 +1,8 @@
+/*
+ * FileName:cell.cpp
+ * Name: Xiang Jiewen  Student-ID: 2018051604079
+ * Class: SE.class 3
+ */
 #include <QtWidgets>
 #include "cell.h"
 
