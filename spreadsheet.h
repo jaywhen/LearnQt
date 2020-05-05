@@ -71,4 +71,4 @@ public:
     bool ascending[KeyCount];
 };
 
-#endif
+#endif // SPREADSHEET_H

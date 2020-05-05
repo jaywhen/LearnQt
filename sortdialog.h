@@ -20,4 +20,5 @@ public:
     void setColumnRange(QChar first, QChar last);
 };
 
-#endif
+#endif // SORTDIALOG_H
+

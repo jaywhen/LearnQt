@@ -25,4 +25,5 @@ private slots:
     void on_lineEdit_textChanged();
 };
 
-#endif
+#endif // GOTOCELLDIALOG_H
+

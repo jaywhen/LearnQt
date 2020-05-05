@@ -32,7 +32,6 @@ private slots:
     void open();
     void find();
     void openRecentFile();
-    //void updateStatusBar();
     void goToCell();
     void sort();
     void about();
@@ -74,6 +73,8 @@ private slots:
     void on_actionSort_triggered();
 
 private:
+
+    /* Variables */
     Ui::MainWindow *ui;
     enum { MaxRecentFiles = 5 };
     QAction *recentFileActions[MaxRecentFiles];
@@ -86,6 +87,7 @@ private:
     QStringList recentFiles;
     Spreadsheet *spreadsheet;
 
+    /* funtions */
     bool okToContinue();
     void readSettings();
     void writeSettings();
