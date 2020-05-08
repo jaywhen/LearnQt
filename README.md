@@ -11,7 +11,7 @@
 
 # Qt QML GUI Programing
 
-![qml-anchors](Learn-Qml/src/Anchors/imag/Untitled Diagram.png)
+![qml-anchors](Learn-Qml/asset/anchors.png)
 
 
 
