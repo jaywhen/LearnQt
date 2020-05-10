@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 1.4 //To use TextArea, it must be this version1.4
 import QtQuick.Dialogs 1.2
+import QtQuick.Controls.Styles 1.4
 
 ApplicationWindow {
     id: root
@@ -87,7 +88,17 @@ ApplicationWindow {
     TextArea {
         id: textarea
         anchors.fill: parent
-//        textColor: "orange"
+        style: TextAreaStyle {
+            textColor: "#333"
+            selectionColor: "steelblue"
+            selectedTextColor: "#eee"
+            //backgroundColor: "#eee"
+            font.pointSize: 16
+
+        }
+
+        textFormat: TextEdit.AutoText
+        wrapMode: TextEdit.Wrap
 
     }
 
