@@ -7,12 +7,13 @@ ApplicationWindow {
     id: root
     visible: true
     width: 640; height: 480
-    title: qsTr("Untitled--")+qsTr("Notepad")
+    title: qsTr("Untitled-")+qsTr("Notepad")
 
 
     Action {
         id: newAction
         text: qsTr("&New")
+        shortcut: "ctrl+n"
         onTriggered: {
             textarea.text = "";
         }
@@ -21,67 +22,128 @@ ApplicationWindow {
     Action {
         id: openAction
         text: qsTr("&Open")
+        shortcut: "ctrl+o"
         onTriggered: {
-            openDialog.open()
+            fileDialog.open()
         }
 
     }
+
+    Action {
+        id: saveAction
+        text: qsTr("&Save")
+        shortcut: "ctrl+s"
+
+    }
+
+
+
+    Action {
+        id: undoAction
+        text: qsTr("Undo")
+        shortcut: "ctrl+z"
+    }
+
+    Action {
+        id: copyAction
+        text: qsTr("Copy")
+        shortcut: "ctrl+c"
+    }
+
+    Action {
+        id: pasteAction
+        text: qsTr("Paste")
+        shortcut: "ctrl+p"
+    }
+
+    Action {
+        id: cutAction
+        text: qsTr("Cut")
+        shortcut: "ctrl+x"
+    }
+
+    Action {
+        id: aboutAction
+        text: qsTr("About")
+        onTriggered: {
+            aboutDialog.open()
+        }
+    }
+
+    Action {
+        id: darkThemeAction
+        text: qsTr("Dark")
+    }
+
+
+
+
+
 
 
     menuBar: MenuBar {
         Menu {
-            title: qsTr("File")
+            title: qsTr("&File")
             MenuItem {action: newAction}
             MenuSeparator{}
             MenuItem {action: openAction}
+            MenuItem {action: saveAction}
 
 
         }
+
+        Menu {
+            title: qsTr("&Edit")
+            MenuItem {action: undoAction}
+            MenuSeparator{}
+            MenuItem {action: cutAction}
+            MenuItem {action: copyAction}
+            MenuItem {action: pasteAction}
+
+
+        }
+
+        Menu {
+            title: qsTr("&Themes")
+            MenuItem {action: darkThemeAction}
+        }
+
+        Menu {
+            title: qsTr("&Help")
+            MenuItem {action: aboutAction}
+        }
+
     }
 
 
 
+    property var nametype: [
+        "Text files (*.txt)", "HTML files (*.html, *.htm)",
+        "C files (*.c)", "C++ files (*.cpp, *.cc)",
+        "JS files (*js)", "JSON files (*.json)", "Java files (*.java)",
+        "Python files (*py)", "QML files (*.qml)", "XML files (*.xml)"
 
 
-//    menuBar: MenuBar {
-//        Menu {
-//            title: qsTr("&File")
-//            Action {
-//                text: qsTr("&New")
-//            }
-//            //MenuSeparator { }
-//            Action {
-//                text: qsTr("&Open")
-//                onTriggered: {
-//                    fileDialog.open()
-//                }
-//            }
-//            Action {
-//                text: qsTr("&Save")
-//            }
 
-//        }
-//        Menu {
-//            title: qsTr("&Help")
-//            Action {
-//                text: qsTr("&About Notepad")
-//            }
-//            Action {
-//                text: qsTr("A&bout Qt")
-//            }
-//        }
-//    }
-
+                           ]
 
     FileDialog {
-        id: openDialog
+        id: fileDialog
         title: "Please choose a file"
+        nameFilters: nametype
         folder: shortcuts.home
         onAccepted: {
             console.log("You chose: " + openDialog.fileUrls)
 
         }
 
+    }
+
+    MessageDialog {
+        id: aboutDialog
+        title: "About Notepad"
+        text: "A boring notepad application"
+        icon: StandardIcon.Information
     }
 
 
@@ -96,6 +158,7 @@ ApplicationWindow {
             font.pointSize: 16
 
         }
+
 
         textFormat: TextEdit.AutoText
         wrapMode: TextEdit.Wrap
