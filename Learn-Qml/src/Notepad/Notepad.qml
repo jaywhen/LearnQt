@@ -24,7 +24,7 @@ ApplicationWindow {
         text: qsTr("&Open")
         shortcut: "ctrl+o"
         onTriggered: {
-            fileDialog.open()
+            content.selectFile()
         }
 
     }
@@ -133,11 +133,11 @@ ApplicationWindow {
         nameFilters: nametype
         folder: shortcuts.home
         onAccepted: {
-            console.log("You chose: " + openDialog.fileUrls)
 
         }
 
     }
+
 
     MessageDialog {
         id: aboutDialog
@@ -147,22 +147,27 @@ ApplicationWindow {
     }
 
 
-    TextArea {
-        id: textarea
+//    TextArea {
+//        id: textarea
+//        anchors.fill: parent
+//        style: TextAreaStyle {
+//            textColor: "#333"
+//            selectionColor: "steelblue"
+//            selectedTextColor: "#eee"
+//            //backgroundColor: "#eee"
+//            font.pointSize: 16
+
+//        }
+
+
+//        textFormat: TextEdit.AutoText
+//        wrapMode: TextEdit.Wrap
+
+//    }
+    XTextEdit {
+        id: xtextedit
         anchors.fill: parent
-        style: TextAreaStyle {
-            textColor: "#333"
-            selectionColor: "steelblue"
-            selectedTextColor: "#eee"
-            //backgroundColor: "#eee"
-            font.pointSize: 16
-
-        }
-
-
-        textFormat: TextEdit.AutoText
-        wrapMode: TextEdit.Wrap
-
     }
+
 
 }
