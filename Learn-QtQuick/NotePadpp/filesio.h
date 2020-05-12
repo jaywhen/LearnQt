@@ -1,30 +1,38 @@
 #ifndef FILESIO_H
 #define FILESIO_H
 
-#include <QQuickTextDocument>
-#include <QtGui/QTextCharFormat>
-#include <qqmlfile.h>
-
+#include <QObject>
+#include <QFile>
+//#include <QFileInfo>
+#include <QUrl>
 class FilesIO : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QUrl fileUrl READ fileUrl WRITE setFileUrl NOTIFY fileUrlChanged)
-    //Q_PROPERTY(QUrl fileUrl READ fileUrl WRITE setFileUrl NOTIFY fileUrlChanged)
+    //Q_PROPERTY(QString data READ data WRITE setData NOTIFY dataChanged)
 public:
-    FilesIO();
-    QUrl fileUrl() const;
+    explicit FilesIO(QObject *parent = 0);
 
-public Q_SLOTS:
-    void saveAs(const QUrl &arg, const QString &fileType);
-    void setFileUrl(const QUrl &arg);
+    //void setData
 
-Q_SIGNALS:
-    void error(QString message);
+
+
+public slots:
+    void save(const QString &data, const QUrl &url);
+    QString open(const QUrl &url);
+
+
+//protected slots:
+//    void dataRefresh();
+
+
+//signals:
+//    void dataChanged();
+
 
 private:
-    QTextDocument *m_doc;
-    QUrl m_fileUrl;
-
+    QFile m_file;
+    //QString m_data;
+    //QTimer m_Timer;
 
 };
 

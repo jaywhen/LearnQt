@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 1.4 //To use TextArea, it must be this version1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
-
+import FilesIO 1.0
 
 
 ApplicationWindow {
@@ -10,6 +10,15 @@ ApplicationWindow {
     visible: true
     width: 640; height: 480
     title: qsTr("Untitled-")+qsTr("Notepad")
+
+    property string currentfile
+    //title: document.documentTitle + " - Text Editor Example"
+    minimumWidth: 400
+    minimumHeight: 300
+
+
+
+
 
 
     Action {
@@ -26,8 +35,7 @@ ApplicationWindow {
         text: qsTr("&Open")
         shortcut: "ctrl+o"
         onTriggered: {
-            fileDialog.selectExisting = true
-            fileDialog.open()
+            openFileDialog.open()
         }
 
     }
@@ -37,8 +45,7 @@ ApplicationWindow {
         text: qsTr("&Save")
         shortcut: "ctrl+s"
         onTriggered: {
-            fileDialog.selectExisting = false
-            fileDialog.open()
+            //filesio.save(textarea.text, )
         }
 
 
@@ -81,7 +88,13 @@ ApplicationWindow {
     Action {
         id: darkThemeAction
         text: qsTr("Dark")
+        onTriggered: {
+
+        }
     }
+
+
+
 
 
 
@@ -137,14 +150,20 @@ ApplicationWindow {
                            ]
 
     FileDialog {
-        id: fileDialog
-        title: "Please choose a file"
-        nameFilters: nametype
-        folder: shortcuts.home
+        id: openFileDialog
+        title: "Choose a file! man!"
         onAccepted: {
+            textarea.text = filesio.open(openFileDialog.fileUrl)
 
         }
+    }
 
+    FileDialog {
+        id: saveFileDialog
+        title: "Choose a file~~~~"
+        onAccepted: {
+            filesio.save(textarea.text, saveFileDialog.fileUrl)
+        }
     }
 
 
@@ -157,9 +176,11 @@ ApplicationWindow {
 
 
     TextArea {
+        Accessible.name: "filesio"
         id: textarea
         anchors.fill: parent
         style: TextAreaStyle {
+            id: textareastyle
             textColor: "#333"
             selectionColor: "steelblue"
             selectedTextColor: "#eee"
@@ -193,6 +214,15 @@ ApplicationWindow {
 //        Component.onCompleted: forceActiveFocus()
 
 //    }
+
+    FilesIO {
+        id: filesio
+    }
+
+
+
+
+
 
 
 
