@@ -24,14 +24,15 @@
 
  ## ｗｉｄｇｅｔ中的信号与槽
 
-槽：处理函数，发送的信号，需要处理，处理的函数即为槽
+* 槽：处理函数，发送的信号，需要处理，处理的函数即为槽
 
+  信号：只需声明，不需实现。moc会自动生成。
 
-
-两种写法：
+* connect两种写法：
 
 ```c++
 connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
 connect(closeButton, &QPushButton::clicked, this, &FindDialog::close);
 //connect(信号的发送者，信号函数的地址，信号的接收者，槽的地址)；
 ```
+
