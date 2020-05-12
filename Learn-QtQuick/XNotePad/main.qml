@@ -1,3 +1,4 @@
+// 2018051604079 Xiang Jiewen
 import QtQuick 2.2
 import QtQuick.Controls 1.4 //To use TextArea, it must be this version1.4
 import QtQuick.Dialogs 1.2
@@ -45,10 +46,11 @@ ApplicationWindow {
         }
     }
 
-    Action {
-        id: saveASAction
-        onTriggered: saveAsDialog.open()
-    }
+//    Action {
+//        id: saveASAction
+//        text: qsTr("S&ave as")
+//        onTriggered: saveAsDialog.open()
+//    }
 
 
 
@@ -88,17 +90,9 @@ ApplicationWindow {
         id: darkThemeAction
         text: qsTr("Dark")
         onTriggered: {
-
+            textarea.text = "Coming soon ..."
         }
     }
-
-
-
-
-
-
-
-
 
 
     menuBar: MenuBar {
@@ -108,6 +102,7 @@ ApplicationWindow {
             MenuSeparator{}
             MenuItem {action: openAction}
             MenuItem {action: saveAction}
+            //MenuItem {action: saveASAction}
 
 
         }
@@ -143,14 +138,12 @@ ApplicationWindow {
         "C files (*.c)", "C++ files (*.cpp, *.cc)",
         "JS files (*js)", "JSON files (*.json)", "Java files (*.java)",
         "Python files (*py)", "QML files (*.qml)", "XML files (*.xml)"
-
-
-
                            ]
 
     FileDialog {
         id: openFileDialog
         title: "Choose a file! man!"
+        nameFilters: nametype
         onAccepted: {
             textarea.text = filesio.open(openFileDialog.fileUrl)
             currentfile = openFileDialog.fileUrl
@@ -161,6 +154,7 @@ ApplicationWindow {
     FileDialog {
         id: saveAsDialog
         title: "Choose a file~~~~"
+        nameFilters: nametype
         onAccepted: {
             filesio.save(textarea.text, saveFileDialog.fileUrl)
             currentfile = openFileDialog.fileUrl
@@ -202,14 +196,4 @@ ApplicationWindow {
     FilesIO {
         id: filesio
     }
-
-
-
-
-
-
-
-
-
-
 }
