@@ -1,4 +1,4 @@
-import QtQuick 2.12
+import QtQuick 2.2
 import QtQuick.Controls 1.4 //To use TextArea, it must be this version1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
@@ -12,13 +12,8 @@ ApplicationWindow {
     title: qsTr("Untitled-")+qsTr("Notepad")
 
     property string currentfile
-    //title: document.documentTitle + " - Text Editor Example"
     minimumWidth: 400
     minimumHeight: 300
-
-
-
-
 
 
     Action {
@@ -45,10 +40,14 @@ ApplicationWindow {
         text: qsTr("&Save")
         shortcut: "ctrl+s"
         onTriggered: {
-            //filesio.save(textarea.text, )
+            filesio.save(textarea.text, currentfile)
+
         }
+    }
 
-
+    Action {
+        id: saveASAction
+        onTriggered: saveAsDialog.open()
     }
 
 
@@ -154,16 +153,19 @@ ApplicationWindow {
         title: "Choose a file! man!"
         onAccepted: {
             textarea.text = filesio.open(openFileDialog.fileUrl)
+            currentfile = openFileDialog.fileUrl
 
         }
     }
 
     FileDialog {
-        id: saveFileDialog
+        id: saveAsDialog
         title: "Choose a file~~~~"
         onAccepted: {
             filesio.save(textarea.text, saveFileDialog.fileUrl)
+            currentfile = openFileDialog.fileUrl
         }
+
     }
 
 
@@ -176,7 +178,7 @@ ApplicationWindow {
 
 
     TextArea {
-        Accessible.name: "filesio"
+
         id: textarea
         anchors.fill: parent
         style: TextAreaStyle {
@@ -195,25 +197,7 @@ ApplicationWindow {
 
     }
 
-//    TextArea {
-//        Accessible.name: "document"
-//        id: textarea
-//        anchors.fill:  parent
 
-//        property variant multiAnswersStrArray: []
-//        property variant multiAnswersStrArrayIndex: 0
-
-//        frameVisible: true
-//        width: parent.width
-//        height: parent.height/2
-
-
-//        baseUrl: "qrc:/"
-//        text: document.text
-//        textFormat: Qt.RichText
-//        Component.onCompleted: forceActiveFocus()
-
-//    }
 
     FilesIO {
         id: filesio

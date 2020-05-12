@@ -8,12 +8,8 @@
 class FilesIO : public QObject
 {
     Q_OBJECT
-    //Q_PROPERTY(QString data READ data WRITE setData NOTIFY dataChanged)
 public:
     explicit FilesIO(QObject *parent = 0);
-
-    //void setData
-
 
 
 public slots:
@@ -21,18 +17,9 @@ public slots:
     QString open(const QUrl &url);
 
 
-//protected slots:
-//    void dataRefresh();
-
-
-//signals:
-//    void dataChanged();
-
 
 private:
     QFile m_file;
-    //QString m_data;
-    //QTimer m_Timer;
 
 };
 
