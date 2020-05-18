@@ -1,14 +1,17 @@
 import QtQuick 2.12
-import QtQuick.Controls 1.4 //To use TextArea, it must be this version1.4
+import QtQuick.Controls 1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
+
+
 
 ApplicationWindow {
     id: root
     visible: true
     width: 640; height: 480
     title: qsTr("Untitled-")+qsTr("Notepad")
-
+    property string bkcolor: "white"
+    property string textscolor: "black"
 
     Action {
         id: newAction
@@ -25,6 +28,7 @@ ApplicationWindow {
         shortcut: "ctrl+o"
         onTriggered: {
             content.selectFile()
+
         }
 
     }
@@ -42,24 +46,36 @@ ApplicationWindow {
         id: undoAction
         text: qsTr("Undo")
         shortcut: "ctrl+z"
+        onTriggered: {
+            textarea.undo()
+        }
     }
 
     Action {
         id: copyAction
         text: qsTr("Copy")
         shortcut: "ctrl+c"
+        onTriggered: {
+            textarea.copy()
+        }
     }
 
     Action {
         id: pasteAction
         text: qsTr("Paste")
         shortcut: "ctrl+p"
+        onTriggered: {
+            textarea.paste()
+        }
     }
 
     Action {
         id: cutAction
         text: qsTr("Cut")
         shortcut: "ctrl+x"
+        onTriggered: {
+            textarea.cut()
+        }
     }
 
     Action {
@@ -73,6 +89,19 @@ ApplicationWindow {
     Action {
         id: darkThemeAction
         text: qsTr("Dark")
+        onTriggered: {
+            bkcolor = "darkslategray"
+            textscolor = "ghostwhite"
+        }
+    }
+
+    Action {
+        id: whiteyThemeAction
+        text: qsTr("Whitey")
+        onTriggered: {
+            bkcolor = "white"
+            textscolor = "black"
+        }
     }
 
 
@@ -106,6 +135,7 @@ ApplicationWindow {
         Menu {
             title: qsTr("&Themes")
             MenuItem {action: darkThemeAction}
+            MenuItem {action: whiteyThemeAction}
         }
 
         Menu {
@@ -147,27 +177,28 @@ ApplicationWindow {
     }
 
 
-//    TextArea {
-//        id: textarea
-//        anchors.fill: parent
-//        style: TextAreaStyle {
-//            textColor: "#333"
-//            selectionColor: "steelblue"
-//            selectedTextColor: "#eee"
-//            //backgroundColor: "#eee"
-//            font.pointSize: 16
-
-//        }
-
-
-//        textFormat: TextEdit.AutoText
-//        wrapMode: TextEdit.Wrap
-
-//    }
-    XTextEdit {
-        id: xtextedit
+    TextArea {
+        id: textarea
         anchors.fill: parent
+        style: TextAreaStyle {
+            id: textareastyle
+
+            textColor: textscolor
+            selectionColor: "steelblue"
+            selectedTextColor: "#eee"
+            backgroundColor: bkcolor
+            font.pointSize: 16
+        }
+
+
+        textFormat: TextEdit.AutoText
+        wrapMode: TextEdit.Wrap
+
     }
+
+
+
+
 
 
 }

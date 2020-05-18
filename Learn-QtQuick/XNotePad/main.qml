@@ -16,6 +16,9 @@ ApplicationWindow {
     minimumWidth: 400
     minimumHeight: 300
 
+    property string bkcolor: "white"
+    property string textscolor: "black"
+
 
     Action {
         id: newAction
@@ -90,7 +93,17 @@ ApplicationWindow {
         id: darkThemeAction
         text: qsTr("Dark")
         onTriggered: {
-            textarea.text = "Coming soon ..."
+            bkcolor = "darkslategray"
+            textscolor = "ghostwhite"
+        }
+    }
+
+    Action {
+        id: whiteyThemeAction
+        text: qsTr("Whitey")
+        onTriggered: {
+            bkcolor = "white"
+            textscolor = "black"
         }
     }
 
@@ -121,6 +134,7 @@ ApplicationWindow {
         Menu {
             title: qsTr("&Themes")
             MenuItem {action: darkThemeAction}
+            MenuItem {action: whiteyThemeAction}
         }
 
         Menu {
@@ -177,12 +191,12 @@ ApplicationWindow {
         anchors.fill: parent
         style: TextAreaStyle {
             id: textareastyle
-            textColor: "#333"
+
+            textColor: textscolor
             selectionColor: "steelblue"
             selectedTextColor: "#eee"
-            //backgroundColor: "#eee"
+            backgroundColor: bkcolor
             font.pointSize: 16
-
         }
 
 
