@@ -13,6 +13,9 @@ ApplicationWindow {
     property string bkcolor: "white"
     property string textscolor: "black"
 
+    minimumWidth: 400
+    minimumHeight: 300
+
     Action {
         id: newAction
         text: qsTr("&New")
@@ -195,10 +198,5 @@ ApplicationWindow {
         wrapMode: TextEdit.Wrap
 
     }
-
-
-
-
-
 
 }

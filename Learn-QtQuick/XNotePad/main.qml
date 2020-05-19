@@ -45,17 +45,17 @@ ApplicationWindow {
         shortcut: "ctrl+s"
         onTriggered: {
             filesio.save(textarea.text, currentfile)
-
         }
     }
 
-//    Action {
-//        id: saveASAction
-//        text: qsTr("S&ave as")
-//        onTriggered: saveAsDialog.open()
-//    }
-
-
+    Action {
+        id: saveASAction
+        text: qsTr("S&ave as")
+        onTriggered: {
+            saveAsDialog.selectExisting = false
+            saveAsDialog.open()
+        }
+    }
 
     Action {
         id: undoAction
@@ -115,9 +115,7 @@ ApplicationWindow {
             MenuSeparator{}
             MenuItem {action: openAction}
             MenuItem {action: saveAction}
-            //MenuItem {action: saveASAction}
-
-
+            MenuItem {action: saveASAction}
         }
 
         Menu {
@@ -169,9 +167,10 @@ ApplicationWindow {
         id: saveAsDialog
         title: "Choose a file~~~~"
         nameFilters: nametype
+
         onAccepted: {
-            filesio.save(textarea.text, saveFileDialog.fileUrl)
-            currentfile = openFileDialog.fileUrl
+            filesio.save(textarea.text, saveAsDialog.fileUrl)
+            currentfile = saveAsDialog.fileUrl
         }
 
     }
