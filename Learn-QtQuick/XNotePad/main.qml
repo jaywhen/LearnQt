@@ -1,6 +1,6 @@
 // 2018051604079 Xiang Jiewen
 import QtQuick 2.2
-import QtQuick.Controls 1.4 //To use TextArea, it must be this version1.4
+import QtQuick.Controls 1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.0
@@ -11,7 +11,12 @@ ApplicationWindow {
     id: root
     visible: true
     width: 640; height: 480
+
+
     title: qsTr("XNotepad")
+    /* TODO: let window title be like this: "untitled-*Notepad;
+     * if text changed the "*" will be disappear and display file name
+     */
 //    property string currentfile
 //    property bool tchanged: false
 //    property bool isSave: false
@@ -22,6 +27,18 @@ ApplicationWindow {
     //property string filetitle: currentfile
 
     //property string windowTitle: qsTr("Untitled")+(tchanged ? "*" : "")+qsTr("-Notepad")
+
+    property string about: qsTr("<h2>XNotePad 0.6</h2>"+
+                                "<p style=\"font-family:'Sans Serif'; font-weight:300; font-size:12pt;\">👻This is a boring notepad application.\n"+
+                                " You can spread it without any license."+
+                                "<p style=\"font-family:'Sans Serif'; font-weight:300; font-size:12pt;\">🤷‍If you want choose a editor\n, I'll recommend <a href=\"https://kate-editor.org/\">Kate</a> or <a href=\"https://code.visualstudio.com/\">VsCode</a>."+
+                                "<p>----------------------------------------------------------------------------------------------"+
+                                "<p style=\"font-family:'Sans Serif'; font-weight:300; font-size:12pt;\">😀And if you have leisure, you can visit the author's home page: "+
+
+
+                                "<p style=\"font-size:11pt;\"><a href=\"https://jaywhen.com/\">Author's home page</a>"+
+                                " ----- "+
+                                "<a href=\"https://github.com/jaywhen/SpreadShiiiiit\">Code Repositories </a>")
 
 
     property string bkcolor: "white"
@@ -43,6 +60,7 @@ ApplicationWindow {
         id: openAction
         text: qsTr("&Open")
         shortcut: "ctrl+o"
+        iconSource: "qrc:/img/open.png"
         onTriggered: {
             openFileDialog.open()
             //tchanged = false
@@ -73,24 +91,28 @@ ApplicationWindow {
         id: undoAction
         text: qsTr("Undo")
         shortcut: "ctrl+z"
+        onTriggered: textarea.undo()
     }
 
     Action {
         id: copyAction
         text: qsTr("Copy")
         shortcut: "ctrl+c"
+        onTriggered: textarea.copy()
     }
 
     Action {
         id: pasteAction
         text: qsTr("Paste")
         shortcut: "ctrl+p"
+        onTriggered: textarea.paste()
     }
 
     Action {
         id: cutAction
         text: qsTr("Cut")
         shortcut: "ctrl+x"
+        onTriggered: textarea.cut()
     }
 
     Action {
@@ -178,9 +200,13 @@ ApplicationWindow {
         Row {
             anchors.fill: parent
             //spacing: 0
+            ToolButton {action: openAction}
+            ToolBarSeparator{}
             ToolButton {action: fontplusAction}
             ToolButton {action: fontreduceAction}
+            ToolBarSeparator{}
             ToolButton {action: boldAction}
+
         }
 
 
@@ -197,7 +223,7 @@ ApplicationWindow {
 
     FileDialog {
         id: openFileDialog
-        title: "Choose a file! man!"
+        title: "Choose a file! bala~bala~"
         nameFilters: nametype
         onAccepted: {
             textarea.text = filesio.open(openFileDialog.fileUrl)
@@ -223,7 +249,7 @@ ApplicationWindow {
     MessageDialog {
         id: aboutDialog
         title: "About Notepad"
-        text: "A boring notepad application"
+        text: about
         icon: StandardIcon.Information
     }
 

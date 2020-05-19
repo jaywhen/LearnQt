@@ -4,7 +4,6 @@
 
 #include <QObject>
 #include <QFile>
-//#include <QFileInfo>
 #include <QUrl>
 class FilesIO : public QObject
 {
