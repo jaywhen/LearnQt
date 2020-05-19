@@ -3,6 +3,7 @@ import QtQuick 2.2
 import QtQuick.Controls 1.4 //To use TextArea, it must be this version1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Layouts 1.0
 import FilesIO 1.0
 
 
@@ -10,14 +11,23 @@ ApplicationWindow {
     id: root
     visible: true
     width: 640; height: 480
-    title: qsTr("Untitled-")+qsTr("Notepad")
-
-    property string currentfile
+    title: qsTr("XNotepad")
+//    property string currentfile
+//    property bool tchanged: false
+//    property bool isSave: false
+//    property bool isopen: false
     minimumWidth: 400
     minimumHeight: 300
 
+    //property string filetitle: currentfile
+
+    //property string windowTitle: qsTr("Untitled")+(tchanged ? "*" : "")+qsTr("-Notepad")
+
+
     property string bkcolor: "white"
     property string textscolor: "black"
+    property var fontsize: 12
+    property var fontweight: 50
 
 
     Action {
@@ -35,6 +45,7 @@ ApplicationWindow {
         shortcut: "ctrl+o"
         onTriggered: {
             openFileDialog.open()
+            //tchanged = false
         }
 
     }
@@ -52,6 +63,7 @@ ApplicationWindow {
         id: saveASAction
         text: qsTr("S&ave as")
         onTriggered: {
+            //isSave = true
             saveAsDialog.selectExisting = false
             saveAsDialog.open()
         }
@@ -107,6 +119,24 @@ ApplicationWindow {
         }
     }
 
+    Action {
+        id: boldAction
+        text: qsTr("&Bold")
+        iconSource: "qrc:/img/bold.png"
+        onTriggered: fontweight+=75
+    }
+    Action {
+        id: fontplusAction
+        text: qsTr("&Plus")
+        iconSource: "qrc:/img/fontplus.png"
+        onTriggered: fontsize+=1
+    }
+    Action {
+        id: fontreduceAction
+        text: qsTr("&Reduce")
+        iconSource: "qrc:/img/fontreduce.png"
+        onTriggered: fontsize-=1
+    }
 
     menuBar: MenuBar {
         Menu {
@@ -142,10 +172,23 @@ ApplicationWindow {
 
     }
 
+    toolBar: ToolBar {
+        id: toolbar
+        width: parent.width
+        Row {
+            anchors.fill: parent
+            //spacing: 0
+            ToolButton {action: fontplusAction}
+            ToolButton {action: fontreduceAction}
+            ToolButton {action: boldAction}
+        }
+
+
+    }
 
 
     property var nametype: [
-        "All files (*.*)",
+        "All files ()",
         "Text files (*.txt)", "HTML files (*.html, *.htm)",
         "C files (*.c)", "C++ files (*.cpp, *.cc)",
         "JS files (*js)", "JSON files (*.json)", "Java files (*.java)",
@@ -158,7 +201,8 @@ ApplicationWindow {
         nameFilters: nametype
         onAccepted: {
             textarea.text = filesio.open(openFileDialog.fileUrl)
-            currentfile = openFileDialog.fileUrl
+            //currentfile = openFileDialog.fileUrl
+            //tchanged = false
 
         }
     }
@@ -170,7 +214,7 @@ ApplicationWindow {
 
         onAccepted: {
             filesio.save(textarea.text, saveAsDialog.fileUrl)
-            currentfile = saveAsDialog.fileUrl
+            //currentfile = saveAsDialog.fileUrl
         }
 
     }
@@ -188,6 +232,7 @@ ApplicationWindow {
 
         id: textarea
         anchors.fill: parent
+
         style: TextAreaStyle {
             id: textareastyle
 
@@ -195,8 +240,11 @@ ApplicationWindow {
             selectionColor: "steelblue"
             selectedTextColor: "#eee"
             backgroundColor: bkcolor
-            font.pointSize: 16
+            font.pointSize: fontsize
+            font.weight: fontweight
         }
+
+        //onTextChanged: tchanged = true
 
 
         textFormat: TextEdit.AutoText

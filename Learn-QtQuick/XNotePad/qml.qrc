@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>img/bold.png</file>
+        <file>img/fontplus.png</file>
+        <file>img/fontreduce.png</file>
     </qresource>
 </RCC>

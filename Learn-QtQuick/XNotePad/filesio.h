@@ -14,7 +14,7 @@ public:
 
 
 public slots:
-    void saveas();
+
     void save(const QString &data, const QUrl &url);
     QString open(const QUrl &url);
 
