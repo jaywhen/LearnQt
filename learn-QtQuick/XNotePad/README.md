@@ -10,5 +10,5 @@ Some functions:
 * darkmode
 * Basic text editing: `copy`  `paste` `undo` `cut` ...... && `bold` `fontsize+` `fontsize-`  
 
-​                                                                                                                   ----Jay WhenXiang
+​                                                                                                       
 

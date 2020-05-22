@@ -38,7 +38,7 @@ ApplicationWindow {
 
                                 "<p style=\"font-size:11pt;\"><a href=\"https://jaywhen.com/\">Author's home page</a>"+
                                 " ----- "+
-                                "<a href=\"https://github.com/jaywhen/SpreadShiiiiit\">Code Repositories </a>")
+                                "<a href=\"https://github.com/jaywhen/LearnQt/tree/master/learn-QtQuick/XNotePad\">Code Repositories </a>")
 
 
     property string bkcolor: "white"
