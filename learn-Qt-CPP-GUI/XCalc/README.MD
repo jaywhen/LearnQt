@@ -46,4 +46,3 @@ $ git clone https://github.com/jaywhen/XCalc.git
 $ cd XCalc && qmake && make
 $ ./XCalc
 ```
->>>>>>> Xcalc 

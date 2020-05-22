@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Noob Note
 
 * 格式化代码：`ctrl` + `i`
