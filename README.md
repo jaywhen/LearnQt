@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Noob Note
 
 * 格式化代码：`ctrl` + `i`
@@ -23,7 +22,7 @@
 
 # Qt C++ GUI Programing
 
- ## ｗｉｄｇｅｔ中的信号与槽
+ ## Widget 中的信号与槽
 
 * 槽：处理函数，发送的信号，需要处理，处理的函数即为槽
 
@@ -36,4 +35,10 @@ connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
 connect(closeButton, &QPushButton::clicked, this, &FindDialog::close);
 //connect(信号的发送者，信号函数的地址，信号的接收者，槽的地址)；
 ```
+
+# Projects
+
+* [XCalc](learn-Qt-CPP-GUI/XCalc) : A simple calculator
+* [XSpreadsheet](learn-Qt-CPP-GUI/XSpreadsheet) : A simple Excel
+* [XNotePad](learn-QtQuick/XNotePad) : A simple Editor
 
