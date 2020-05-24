@@ -5,6 +5,7 @@
 #include <QLineEdit>
 #include <QCheckBox>
 #include <QLayout>
+
 FindDialog::FindDialog(QWidget *parent)
     : QDialog(parent)
 {
@@ -24,13 +25,12 @@ FindDialog::FindDialog(QWidget *parent)
     //have not text, can not click button
 
 
-    //the style of qt5
     connect(lineEdit, &QLineEdit::textChanged, this, &FindDialog::enableFindButton);
 
     connect(findButton, &QPushButton::clicked, this, &FindDialog::findClicked);
     connect(closeButton, &QPushButton::clicked, this, &FindDialog::close);
 
-    //the style of qt4
+
     //connect(lineEdit, SIGNAL(textChanged(const QString &)),
     //            this, SLOT(enableFindButton(const QString &)));
     //connect(findButton, SIGNAL(clicked()), this, SLOT(findClicked()));
@@ -80,3 +80,6 @@ void FindDialog::findClicked()
     }
 
 }
+
+FindDialog::~FindDialog() {}
+
