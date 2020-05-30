@@ -12,9 +12,9 @@
 
 ## Qt QML GUI Programing
 
-![qml-anchors](Learn-Qml/asset/anchors.png)
+![qml-anchors](learn-Qml/asset/anchors.png)
 
-
+#### 
 
 * [查找色块](https://www.w3.org/TR/css-color-3/#svg-color)
 
