@@ -635,7 +635,7 @@ void MainWindow::about()
     QMessageBox::about(this, tr("About XCacl"),
                        tr("<h2>XCacl 2.0</h2>"
                           "<p>XCalc 计算器"
-                          "<p><a href=\"https://github.com/jaywhen/XCalc\">代码地址</a>"
+                          "<p><a href=\"https://github.com/jaywhen/LearnQt/tree/master/learn-Qt-CPP-GUI/XCalc\">代码地址</a>"
                           "<p><a href=\"https://jaywhen.com/\">作者主页</a>"
                           "<p>代码重构中．．．"
                           ));

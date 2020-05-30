@@ -276,7 +276,7 @@ void MainWindow::about()
                        tr("<h2>XSpreadsheet 1.0</h2>"
                           "<p>A Spreadsheet program followed Qt demo."
                           "<p>For learn more:<p>"
-                          "<p><a href=\"https://github.com/jaywhen/SpreadShiiiiit\">代码地址</a>"
+                          "<p><a href=\"https://github.com/jaywhen/LearnQt/tree/master/learn-Qt-CPP-GUI/XSpreadsheet\">代码地址</a>"
                           "<p><a href=\"https://jaywhen.com/\">作者主页</a>"
                           ));
 }
