@@ -239,6 +239,7 @@ ApplicationWindow {
         nameFilters: nametype
 
         onAccepted: {
+            //save(const QString &data, const QUrl &url)
             filesio.save(textarea.text, saveAsDialog.fileUrl)
             //currentfile = saveAsDialog.fileUrl
         }

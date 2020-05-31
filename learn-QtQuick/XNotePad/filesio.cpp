@@ -21,7 +21,6 @@ QString FilesIO::open(const QUrl &url)
 {
     m_file.setFileName(url.toLocalFile());
 
-    //open && close
     m_file.open(QIODevice::ReadOnly | QIODevice::Text);
     QString text = m_file.readAll();
     m_file.close();
