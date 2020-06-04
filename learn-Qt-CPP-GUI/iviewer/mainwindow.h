@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QFileSelector>
+#include <QMessageBox>
 #include "imgviewer.h"
 
 QT_BEGIN_NAMESPACE
@@ -27,6 +28,9 @@ private slots:
     void on_action_Next_triggered();
 
     void on_actionPre_triggered();
+    void errorBox(QString &errstr);
+
+    void on_action_About_me_triggered();
 
 private:
     Ui::MainWindow *ui;

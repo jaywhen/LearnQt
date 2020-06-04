@@ -23,10 +23,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::open() {
 
-
-//    QString fileurl = QFileDialog::getOpenFileName(this,
-//                                                   tr("Open a img Dir"), "." ,
-//                                                   tr("PNG files (.png)") );
     QFileDialog openFilesDialog(this);
     openFilesDialog.setWindowTitle(tr("Open a many many imgs"));
     QStringList filetypes;
@@ -35,10 +31,6 @@ void MainWindow::open() {
 
     openFilesDialog.setFileMode(QFileDialog::ExistingFiles);
 
-//    QStringList filesName = QFileDialog::selectedFiles();
-//    if(!fileurl.isEmpty()) {
-
-//    }
     if(openFilesDialog.exec() == QDialog::Accepted) {
 
         QStringList imgfiles = openFilesDialog.selectedFiles();
@@ -49,6 +41,7 @@ void MainWindow::open() {
 
         int index = 0;
         m_imgViewer->setCurrentIndex(index);
+        qDebug() << "now is "<<m_imgViewer->getCurrentIndex();
         //m_imgViewer->displayimgs
 
 
@@ -56,8 +49,12 @@ void MainWindow::open() {
 
     }
 
-    //QStringList allfile = QFileSelector::allSelectors();
 
+}
+
+void MainWindow::errorBox(QString &errstr) {
+    QString err = "ops You are " + errstr + " ! \n";
+    QMessageBox::warning(this, errstr, err);
 }
 
 void MainWindow::on_action_Open_triggered()
@@ -67,21 +64,20 @@ void MainWindow::on_action_Open_triggered()
 
 void MainWindow::nextImg() {
     int index = m_imgViewer->getCurrentIndex();
-    index += 1;
     QString url = m_imgViewer->getPath().at(index);
     m_imgViewer->displayImage(url);
     //index += 1;
     m_imgViewer->setCurrentIndex(index);
-    qDebug () << "next is " <<index;
 }
 
 void MainWindow::preImg() {
     int index = m_imgViewer->getCurrentIndex();
-    index -= 1;
+    //index -= 1;
     QString url = m_imgViewer->getPath().at(index);
     m_imgViewer->displayImage(url);
     //index += 1;
     m_imgViewer->setCurrentIndex(index);
+    qDebug () << "pre is " <<index;
 }
 
 
@@ -96,10 +92,22 @@ static bool ifInTheRange(int index, int low, int high) {
 
 void MainWindow::on_action_Next_triggered()
 {
+    int index = m_imgViewer->getCurrentIndex();
+    index += 1;
+    m_imgViewer->setCurrentIndex(index);
+
+
     int low = 0;
-    int high = m_imgViewer->getPath().length();
+    int high = m_imgViewer->getPath().length() - 1;
+    qDebug() << "high is "<< high;
     if(ifInTheRange(m_imgViewer->getCurrentIndex(), low, high)) {
+
         this->nextImg();
+        qDebug() << "now is "<<m_imgViewer->getCurrentIndex();
+
+    } else {
+        QString mes = "in the end";
+        errorBox(mes);
     }
 
 
@@ -107,7 +115,40 @@ void MainWindow::on_action_Next_triggered()
 
 void MainWindow::on_actionPre_triggered()
 {
-    this->preImg();
+    int index = m_imgViewer->getCurrentIndex();
+    index -= 1;
+    m_imgViewer->setCurrentIndex(index);
+
+
+    int low = 0;
+    int high = m_imgViewer->getPath().length() - 1;
+    if(ifInTheRange(m_imgViewer->getCurrentIndex(), low, high)) {
+
+        this->preImg();
+    } else {
+            QString mes = "in the begin";
+            errorBox(mes);
+    }
+
+
+
+}
+
+void MainWindow::on_action_About_me_triggered()
+{
+//    QString mes = "A img viewer\n";
+//    mes += tr("<a href=\"https://jaywhen.com/\">Author's home page</a>");
+//    mes += tr("<a href=\"https://github.com/jaywhen/LearnQt/tree/master/learn-Qt-CPP-GUI/iviewer\">Code Repositories </a>");
+    QMessageBox::information(this, "About me", tr("<h2>A img viewer\n</h2>"
+                                                  "<p><a href=\"https://jaywhen.com/\">Author's home page</a>\n"
+                                                  "<p><a href=\"https://github.com/jaywhen/LearnQt/tree/master/learn-Qt-CPP-GUI/iviewer\">Code Repositories </a>"
+
+                                                  )
+
+
+
+
+                             );
 
 
 }
