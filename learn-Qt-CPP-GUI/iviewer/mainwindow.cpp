@@ -10,7 +10,6 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_imgViewer);
     //m_imgViewer->displayImage();
 
-
 }
 
 MainWindow::~MainWindow()
