@@ -12,13 +12,9 @@ public:
     void addPaths(const QStringList &paths);
     void displayImage(const QString &url);
     void setCurrentIndex(int &index);
-<<<<<<< HEAD
     void deleteImg(int &pathIndex);
     int getCurrentIndex();
     void setBkNull();   //set background as dark color
-=======
-    int getCurrentIndex();
->>>>>>> f4a31eefcf7826c8cfa7f50df0653a429b16e58b
     QStringList getPath();
     //to do...
 

@@ -24,7 +24,6 @@ int ImgViewer::getCurrentIndex() {
 QStringList ImgViewer::getPath() {
     return m_paths;
 }
-<<<<<<< HEAD
 
 void ImgViewer::deleteImg(int &pathIndex) {
 
@@ -40,5 +39,3 @@ void ImgViewer::setBkNull() {
     setPixmap(darkp);
     setScaledContents(true);
 }
-=======
->>>>>>> f4a31eefcf7826c8cfa7f50df0653a429b16e58b
