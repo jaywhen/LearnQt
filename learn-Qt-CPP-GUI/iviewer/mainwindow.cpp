@@ -18,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent)
         setUsed();
         firstLoad();
 
-
     }
 
 }
@@ -96,7 +95,7 @@ void MainWindow::nextImg() {
         qDebug() << "now current index is "<<m_imgViewer->getCurrentIndex();
 
     } else {
-        QString mes = "in the first picture";
+        QString mes = "in the last picture";
         errorBox(mes);
         index -= 1;
         m_imgViewer->setCurrentIndex(index);
@@ -123,7 +122,7 @@ void MainWindow::preImg() {
 
 
     } else {
-            QString mes = "in the begin";
+            QString mes = "in the first pictrue";
             errorBox(mes);
             index+=1;
             m_imgViewer->setCurrentIndex(index);
@@ -162,6 +161,8 @@ void MainWindow::deletCurrent() {
     int index{0};
     int low = 0;
     int high = m_imgViewer->getPath().length() - 1;
+
+    //have only one pic
     if (low == high) {
 
         m_imgViewer->setBkNull();
@@ -169,13 +170,30 @@ void MainWindow::deletCurrent() {
     }
     if(ifInTheRange(m_imgViewer->getCurrentIndex(), low, high)) {
 
-        this->on_action_Next_triggered();
-        //delete pre
+        //del the last one
+        if (m_imgViewer->getCurrentIndex() == high) {
 
-        index = m_imgViewer->getCurrentIndex();
-        index -= 1;
-        m_imgViewer->deleteImg(index);
-        m_imgViewer->setCurrentIndex(index);
+            this->on_actionPre_triggered();
+            index = m_imgViewer->getCurrentIndex();
+            index += 1;
+            m_imgViewer->deleteImg(index);
+            index -= 1;
+            m_imgViewer->setCurrentIndex(index);
+
+        } else {
+            //del onther one
+            this->on_action_Next_triggered();
+            //delete
+
+            index = m_imgViewer->getCurrentIndex();
+            index -= 1;
+            m_imgViewer->deleteImg(index);
+            m_imgViewer->setCurrentIndex(index);
+
+        }
+
+
+
         qDebug () << "now current index is " << m_imgViewer->getCurrentIndex();
         qDebug () << "now both have " << m_imgViewer->getPath().length();
 
