@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 QT       += core gui sql
+=======
+QT       += core gui
+
+>>>>>>> f4a31eefcf7826c8cfa7f50df0653a429b16e58b
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11

@@ -33,7 +33,11 @@
     <property name="title">
      <string>&amp;View</string>
     </property>
+<<<<<<< HEAD
     <addaction name="action_Exit"/>
+=======
+    <addaction name="action_Del"/>
+>>>>>>> f4a31eefcf7826c8cfa7f50df0653a429b16e58b
     <addaction name="actionPre"/>
     <addaction name="action_Next"/>
    </widget>
@@ -59,7 +63,11 @@
     <bool>false</bool>
    </attribute>
    <addaction name="action_Open"/>
+<<<<<<< HEAD
    <addaction name="action_Exit"/>
+=======
+   <addaction name="action_Del"/>
+>>>>>>> f4a31eefcf7826c8cfa7f50df0653a429b16e58b
    <addaction name="separator"/>
    <addaction name="actionPre"/>
    <addaction name="action_Next"/>
@@ -68,8 +76,12 @@
   </widget>
   <action name="action_Open">
    <property name="icon">
+<<<<<<< HEAD
     <iconset theme="document-open">
      <normaloff>.</normaloff>.</iconset>
+=======
+    <iconset theme="document-open"/>
+>>>>>>> f4a31eefcf7826c8cfa7f50df0653a429b16e58b
    </property>
    <property name="text">
     <string>&amp;Open</string>
@@ -80,29 +92,44 @@
   </action>
   <action name="action_About_me">
    <property name="icon">
+<<<<<<< HEAD
     <iconset theme="help-about">
      <normaloff>.</normaloff>.</iconset>
+=======
+    <iconset theme="help-about"/>
+>>>>>>> f4a31eefcf7826c8cfa7f50df0653a429b16e58b
    </property>
    <property name="text">
     <string>&amp;About me</string>
    </property>
   </action>
+<<<<<<< HEAD
   <action name="action_Exit">
    <property name="icon">
     <iconset theme="application-exit"/>
    </property>
    <property name="text">
     <string>&amp;Exit</string>
+=======
+  <action name="action_Del">
+   <property name="text">
+    <string>&amp;Del</string>
+>>>>>>> f4a31eefcf7826c8cfa7f50df0653a429b16e58b
    </property>
   </action>
   <action name="actionPre">
    <property name="icon">
+<<<<<<< HEAD
     <iconset theme="go-previous">
      <normaloff>.</normaloff>.</iconset>
+=======
+    <iconset theme="go-previous"/>
+>>>>>>> f4a31eefcf7826c8cfa7f50df0653a429b16e58b
    </property>
    <property name="text">
     <string>&amp;Pre</string>
    </property>
+<<<<<<< HEAD
    <property name="shortcut">
     <string>Backspace</string>
    </property>
@@ -111,12 +138,22 @@
    <property name="icon">
     <iconset theme="go-next">
      <normaloff>.</normaloff>.</iconset>
+=======
+  </action>
+  <action name="action_Next">
+   <property name="icon">
+    <iconset theme="go-next"/>
+>>>>>>> f4a31eefcf7826c8cfa7f50df0653a429b16e58b
    </property>
    <property name="text">
     <string>&amp;Next</string>
    </property>
    <property name="shortcut">
+<<<<<<< HEAD
     <string>Space</string>
+=======
+    <string/>
+>>>>>>> f4a31eefcf7826c8cfa7f50df0653a429b16e58b
    </property>
   </action>
  </widget>
