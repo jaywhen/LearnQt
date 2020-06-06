@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>img/bold.png</file>
+        <file>img/fontplus.png</file>
+        <file>img/fontreduce.png</file>
+        <file>img/open.png</file>
+        <file>ToolBarSeparator.qml</file>
+        <file>img/logo.png</file>
+    </qresource>
+</RCC>
